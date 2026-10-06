@@ -109,8 +109,105 @@
           </div>
         </section>
 
+        <!-- 기본 4 / 심화 4: 사진첩 -->
         <section id="photo-album">
           <h2>사진첩</h2>
+
+          <!-- 기본 가로 스크롤과 심화 무한 루프를 한 사진첩 영역에 배치 -->
+          <h3>가로 방향 스크롤</h3>
+          <div class="album-scroll" aria-label="좋아하는 애니메이션 사진첩">
+            <figure class="album-card">
+              <img
+                src="./images/album-zoro-1.webp"
+                alt="롤로노아 조로 공식 캐릭터 이미지"
+                loading="lazy"
+              />
+            </figure>
+
+            <figure class="album-card">
+              <img
+                src="./images/album-zoro-2.jpg"
+                alt="어린 조로와 쿠이나가 대련하는 애니메이션 장면"
+                loading="lazy"
+              />
+            </figure>
+
+            <figure class="album-card">
+              <img
+                src="./images/album-fullmetal-1.png"
+                alt="강철의 연금술사 공식 애니메이션 이미지"
+                loading="lazy"
+              />
+            </figure>
+
+            <figure class="album-card">
+              <img
+                src="./images/album-fullmetal-2.png"
+                alt="에드워드와 알폰스 엘릭 공식 캐릭터 이미지"
+                loading="lazy"
+              />
+            </figure>
+
+            <figure class="album-card">
+              <img
+                src="./images/album-luffy.webp"
+                alt="몽키 D. 루피 공식 캐릭터 이미지"
+                loading="lazy"
+              />
+            </figure>
+
+            <figure class="album-card">
+              <img
+                src="./images/album-nami.webp"
+                alt="나미 공식 캐릭터 이미지"
+                loading="lazy"
+              />
+            </figure>
+
+            <figure class="album-card">
+              <img
+                src="./images/album-naruto-1.webp"
+                alt="나루토와 7반 공식 애니메이션 이미지"
+                loading="lazy"
+              />
+            </figure>
+
+            <figure class="album-card">
+              <img
+                src="./images/album-naruto-2.webp"
+                alt="나루토 질풍전 공식 애니메이션 이미지"
+                loading="lazy"
+              />
+            </figure>
+          </div>
+
+          <h3>무한 루프 배너</h3>
+          <div class="album-marquee" aria-label="가로로 자동 반복되는 애니메이션 사진첩">
+            <div class="album-marquee-track">
+              <div class="album-marquee-group">
+                <img src="./images/album-zoro-1.webp" alt="롤로노아 조로" />
+                <img src="./images/album-zoro-2.jpg" alt="조로와 쿠이나" />
+                <img src="./images/album-fullmetal-1.png" alt="강철의 연금술사" />
+                <img src="./images/album-fullmetal-2.png" alt="엘릭 형제" />
+                <img src="./images/album-luffy.webp" alt="몽키 D. 루피" />
+                <img src="./images/album-nami.webp" alt="나미" />
+                <img src="./images/album-naruto-1.webp" alt="나루토 7반" />
+                <img src="./images/album-naruto-2.webp" alt="나루토 질풍전" />
+              </div>
+
+              <!-- 같은 묶음을 이어 붙여 빈 공간 없이 반복 -->
+              <div class="album-marquee-group" aria-hidden="true">
+                <img src="./images/album-zoro-1.webp" alt="" />
+                <img src="./images/album-zoro-2.jpg" alt="" />
+                <img src="./images/album-fullmetal-1.png" alt="" />
+                <img src="./images/album-fullmetal-2.png" alt="" />
+                <img src="./images/album-luffy.webp" alt="" />
+                <img src="./images/album-nami.webp" alt="" />
+                <img src="./images/album-naruto-1.webp" alt="" />
+                <img src="./images/album-naruto-2.webp" alt="" />
+              </div>
+            </div>
+          </div>
         </section>
 
         <section id="interests">

@@ -141,6 +141,10 @@ footer {
   border-radius: 0 0 0.75rem 0.75rem;
 }
 
+main {
+  min-width: 0;
+}
+
 main section {
   min-height: 30rem;
   padding-block: 2rem;
@@ -207,6 +211,83 @@ main section {
   transform: scale(1.08);
 }
 
+/* 기본 4: 가로 스크롤 사진첩 */
+#photo-album h3 {
+  margin-block: 2rem 1rem;
+  color: var(--gengar-main);
+  font-size: 1rem;
+}
+
+.album-scroll {
+  display: flex;
+  gap: 1rem;
+  padding-block: 0.25rem 1rem;
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+  scroll-padding-inline: 0.25rem;
+  scroll-snap-type: inline mandatory;
+  scrollbar-width: none;
+}
+
+.album-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.album-card {
+  flex: 0 0 clamp(15rem, 38vw, 21rem);
+  margin: 0;
+  overflow: hidden;
+  border: 1px solid var(--gengar-border);
+  border-radius: 0.75rem;
+  background-color: var(--gengar-surface);
+  scroll-snap-align: start;
+}
+
+.album-card img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+
+/* 심화 4: 같은 사진 묶음을 두 번 이어 붙여 무한 반복 */
+.album-marquee {
+  overflow: hidden;
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000 5%,
+    #000 95%,
+    transparent
+  );
+}
+
+.album-marquee-track {
+  display: flex;
+  width: max-content;
+  animation: album-loop 20s linear infinite;
+}
+
+.album-marquee-group {
+  display: flex;
+  flex-shrink: 0;
+  gap: 0.75rem;
+  padding-right: 0.75rem;
+}
+
+.album-marquee-group img {
+  width: 14rem;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 0.75rem;
+}
+
+@keyframes album-loop {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
 footer {
   padding-block: 2rem;
   text-align: center;
@@ -216,6 +297,14 @@ footer {
 @media (width <= 768px) {
   .page-layout {
     grid-template-columns: 1fr;
+  }
+
+  .album-card {
+    flex-basis: 78vw;
+  }
+
+  .album-marquee-group img {
+    width: 12rem;
   }
 }
 
