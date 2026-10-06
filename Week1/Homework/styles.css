@@ -1,14 +1,19 @@
 @charset "UTF-8";
 
 :root {
+  --gengar-main: #6f4c8f;
+  --gengar-dark: #3b294f;
+  --gengar-soft: #eee6f5;
+  --gengar-accent: #d95f9f;
+
   font-family:
     Pretendard,
     -apple-system,
     BlinkMacSystemFont,
     "Segoe UI",
     sans-serif;
-  color: #1f2937;
-  background-color: #ffffff;
+  color: var(--gengar-dark);
+  background-color: #fcfaff;
   font-synthesis: none;
 }
 
@@ -23,6 +28,7 @@ html {
 body {
   min-width: 320px;
   min-height: 100vh;
+  padding-top: 4.5rem;
   margin: 0;
 }
 
@@ -34,6 +40,11 @@ img {
 a {
   color: inherit;
   text-decoration: none;
+}
+
+a:focus-visible {
+  outline: 0.1875rem solid var(--gengar-accent);
+  outline-offset: 0.1875rem;
 }
 
 ul {
@@ -49,15 +60,37 @@ footer {
   margin-inline: auto;
 }
 
+/* 기본 1: 헤더 3등분 + 상단 고정 */
 .site-header {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  z-index: 1000;
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   align-items: center;
   min-height: 4.5rem;
+  background-color: #fcfaff;
+  transform: translateX(-50%);
+}
+
+.header-profile img {
+  /* 프로필 사진 비율 유지 */
+  width: 3rem;
+  height: 3rem;
+  object-fit: cover;
+  border-radius: 50%;
+  transition: box-shadow 0.2s ease;
+}
+
+/* 심화 1: 프로필 hover */
+.header-profile img:hover {
+  box-shadow: 0 0.25rem 1rem rgb(111 76 143 / 35%);
 }
 
 .site-header h1 {
   margin: 0;
+  color: var(--gengar-main);
   text-align: center;
 }
 
@@ -81,4 +114,33 @@ footer {
   .page-layout {
     grid-template-columns: 1fr;
   }
+}
+
+/* 기본 1: 소셜 아이콘 */
+.social-links {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+}
+
+.social-links img {
+  width: 1.75rem;
+  height: 1.75rem;
+  object-fit: contain;
+}
+
+.social-links a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+  border-radius: 50%;
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.social-links a:hover {
+  background-color: var(--gengar-soft);
+  transform: translateY(-0.125rem);
 }
