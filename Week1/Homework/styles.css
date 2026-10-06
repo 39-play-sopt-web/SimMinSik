@@ -4,6 +4,8 @@
   --gengar-main: #6f4c8f;
   --gengar-dark: #3b294f;
   --gengar-soft: #eee6f5;
+  --gengar-surface: #f8f4fb;
+  --gengar-border: #d8c9e5;
   --gengar-accent: #d95f9f;
 
   font-family:
@@ -100,9 +102,49 @@ footer {
   gap: 2rem;
 }
 
+/* 기본 2: 사이드 목차 */
+.side-navigation {
+  position: sticky;
+  top: 5.5rem;
+  align-self: start;
+}
+
+.side-navigation ul {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.side-navigation a {
+  display: block;
+  padding: 0.875rem 1rem;
+  border: 1px solid var(--gengar-border);
+  border-radius: 0.5rem;
+  background-color: var(--gengar-surface);
+  transition:
+    color 0.2s ease,
+    background-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.side-navigation a:hover {
+  color: #ffffff;
+  background-color: var(--gengar-main);
+  transform: translateX(0.25rem);
+}
+
+/* 심화 2: 첫 항목은 위쪽, 마지막 항목은 아래쪽만 둥글게 */
+.side-navigation li:first-child a {
+  border-radius: 0.75rem 0.75rem 0 0;
+}
+
+.side-navigation li:last-child a {
+  border-radius: 0 0 0.75rem 0.75rem;
+}
+
 main section {
   min-height: 30rem;
   padding-block: 2rem;
+  scroll-margin-top: 5.5rem;
 }
 
 footer {
@@ -110,6 +152,7 @@ footer {
   text-align: center;
 }
 
+/* 768px 이하: 사이드 목차와 본문을 세로로 배치 */
 @media (width <= 768px) {
   .page-layout {
     grid-template-columns: 1fr;
