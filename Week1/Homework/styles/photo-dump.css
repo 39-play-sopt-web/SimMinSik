@@ -1,4 +1,4 @@
-/* 기본 3: 포토 덤프 */
+/* 기본 3 */
 .photo-dump-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -53,7 +53,7 @@
   object-position: center 70%;
 }
 
-/* 심화 3: 영역 안에서 이미지만 확대 */
+/* 심화 3: 카드 밖 이미지 숨김 */
 .photo-item:hover img {
   transform: scale(1.08);
 }

@@ -1,4 +1,4 @@
-/* 기본 4: 가로 스크롤 사진첩 */
+/* 기본 4 */
 #photo-album h3 {
   margin-block: 2rem 1rem;
   color: var(--gengar-main);
@@ -36,7 +36,7 @@
   object-fit: cover;
 }
 
-/* 심화 4: 같은 사진 묶음을 두 번 이어 붙여 무한 반복 */
+/* 심화 4: 첫 묶음 뒤에 복사본 이어짐 */
 .album-marquee {
   overflow: hidden;
   mask-image: linear-gradient(

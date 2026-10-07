@@ -1,4 +1,4 @@
-/* 기본 1: 헤더 3등분 + 상단 고정 */
+/* 기본 1: 동일 너비 3등분 */
 .site-header {
   position: fixed;
   top: 0;
@@ -22,7 +22,7 @@
   transition: box-shadow 0.2s ease;
 }
 
-/* 심화 1: 프로필 hover */
+/* 심화 1 */
 .header-profile img:hover {
   box-shadow: 0 0.25rem 1rem rgb(111 76 143 / 35%);
 }
@@ -31,6 +31,10 @@
   margin: 0;
   color: var(--gengar-main);
   text-align: center;
+}
+
+.site-header h1 span {
+  white-space: nowrap;
 }
 
 .social-links {
@@ -59,4 +63,10 @@
 .social-links a:hover {
   background-color: var(--gengar-soft);
   transform: translateY(-0.125rem);
+}
+
+@media (width <= 768px) {
+  .site-header h1 span {
+    display: block;
+  }
 }

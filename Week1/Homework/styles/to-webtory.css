@@ -1,0 +1,43 @@
+/* 기본 6: 가상 요소 아이콘 */
+.webtory-message {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 2rem;
+  margin-top: 1.5rem;
+  border: 1px solid var(--gengar-border);
+  border-radius: 1rem;
+  color: var(--gengar-main);
+  background-color: var(--gengar-surface);
+  font-size: clamp(1rem, 2vw, 1.375rem);
+  font-weight: 700;
+  text-align: center;
+}
+
+.webtory-message::before,
+.webtory-message::after {
+  content: "";
+  flex: 0 0 2rem;
+  width: 2rem;
+  height: 2rem;
+  background: url("../images/pokeball.svg") center / contain no-repeat;
+}
+
+.webtory-message::after {
+  transform: rotate(20deg);
+}
+
+@media (width <= 480px) {
+  .webtory-message {
+    gap: 0.625rem;
+    padding-inline: 1rem;
+  }
+
+  .webtory-message::before,
+  .webtory-message::after {
+    flex-basis: 1.5rem;
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+}

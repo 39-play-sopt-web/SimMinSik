@@ -82,7 +82,7 @@ footer {
   text-align: center;
 }
 
-/* 768px 이하에서는 목차와 본문을 세로로 배치 */
+/* 모바일: 목차 상단 배치 */
 @media (width <= 768px) {
   .page-layout {
     grid-template-columns: 1fr;

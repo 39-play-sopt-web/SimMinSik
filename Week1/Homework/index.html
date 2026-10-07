@@ -14,9 +14,10 @@
     <link rel="stylesheet" href="./styles/photo-dump.css" />
     <link rel="stylesheet" href="./styles/photo-album.css" />
     <link rel="stylesheet" href="./styles/interests.css" />
+    <link rel="stylesheet" href="./styles/to-webtory.css" />
   </head>
   <body>
-    <!-- 기본 1 / 심화 1: 헤더 -->
+    <!-- 기본 1 · 심화 1 -->
     <header class="site-header">
       <div class="header-profile" aria-label="프로필 영역">
         <img
@@ -24,7 +25,7 @@
           alt="심민식 프로필 사진"
         />
       </div>
-      <h1>심민식 블로그</h1>
+      <h1><span>심민식</span> <span>블로그</span></h1>
 
       <nav class="social-links" aria-label="소셜 링크">
         <a
@@ -57,7 +58,7 @@
     </header>
 
     <div class="page-layout">
-      <!-- 기본 2 / 심화 2: 사이드 목차 -->
+      <!-- 기본 2 · 심화 2 -->
       <aside class="side-navigation">
         <nav aria-label="페이지 목차">
           <ul>
@@ -70,7 +71,7 @@
       </aside>
 
       <main>
-        <!-- 기본 3 / 심화 3: 포토 덤프 -->
+        <!-- 기본 3 · 심화 3 -->
         <section id="photo-dump">
           <h2>포토 덤프</h2>
 
@@ -114,11 +115,11 @@
           </div>
         </section>
 
-        <!-- 기본 4 / 심화 4: 사진첩 -->
+        <!-- 기본 4 · 심화 4 -->
         <section id="photo-album">
           <h2>사진첩</h2>
 
-          <!-- 기본 가로 스크롤과 심화 무한 루프를 한 사진첩 영역에 배치 -->
+          <!-- 가로 스크롤 / 무한 루프 분리 -->
           <h3>가로 방향 스크롤</h3>
           <div class="album-scroll" aria-label="좋아하는 애니메이션 사진첩">
             <figure class="album-card">
@@ -200,7 +201,7 @@
                 <img src="./images/album-naruto-2.webp" alt="나루토 질풍전" />
               </div>
 
-              <!-- 같은 묶음을 이어 붙여 빈 공간 없이 반복 -->
+              <!-- 같은 사진 묶음 복제 -->
               <div class="album-marquee-group" aria-hidden="true">
                 <img src="./images/album-zoro-1.webp" alt="" />
                 <img src="./images/album-zoro-2.jpg" alt="" />
@@ -215,7 +216,7 @@
           </div>
         </section>
 
-        <!-- 기본 5 / 심화 5: 관심사 카드 -->
+        <!-- 기본 5 · 심화 5 -->
         <section id="interests">
           <h2>관심사</h2>
 
@@ -297,8 +298,12 @@
           </div>
         </section>
 
+        <!-- 기본 6 -->
         <section id="to-webtory">
           <h2>To. 웹토리</h2>
+          <p class="webtory-message">
+            등가교환이다! 시간과 웹 실력을 등가교환하겠습니다!
+          </p>
         </section>
       </main>
     </div>

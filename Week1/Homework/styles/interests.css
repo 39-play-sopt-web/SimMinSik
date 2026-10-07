@@ -1,4 +1,4 @@
-/* 기본 5: 화면 너비에 따라 열 개수가 바뀌는 관심사 카드 */
+/* 기본 5: 데스크톱 5열 */
 .interest-grid {
   display: grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));
@@ -50,7 +50,7 @@
     background-color 0.2s ease;
 }
 
-/* 심화 5: 카드와 버튼에 hover 변화를 분리해서 적용 */
+/* 심화 5 */
 .interest-card:hover {
   box-shadow: 0 0.75rem 1.5rem rgb(59 41 79 / 18%);
   transform: translateY(-0.375rem);
