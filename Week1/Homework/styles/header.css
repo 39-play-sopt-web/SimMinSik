@@ -1,0 +1,72 @@
+/* 기본 1: 동일 너비 3등분 */
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  z-index: 1000;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: center;
+  width: min(100% - 2rem, 1200px);
+  min-height: 4.5rem;
+  margin-inline: auto;
+  background-color: #fcfaff;
+  transform: translateX(-50%);
+}
+
+.header-profile img {
+  width: 3rem;
+  height: 3rem;
+  object-fit: cover;
+  border-radius: 50%;
+  transition: box-shadow 0.2s ease;
+}
+
+/* 심화 1 */
+.header-profile img:hover {
+  box-shadow: 0 0.25rem 1rem rgb(111 76 143 / 35%);
+}
+
+.site-header h1 {
+  margin: 0;
+  color: var(--gengar-main);
+  text-align: center;
+}
+
+.site-title-part {
+  white-space: nowrap;
+}
+
+.social-links {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+}
+
+.social-links img {
+  width: 1.75rem;
+  height: 1.75rem;
+  object-fit: contain;
+}
+
+.social-links a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+  border-radius: 50%;
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.social-links a:hover {
+  background-color: var(--gengar-soft);
+  transform: translateY(-0.125rem);
+}
+
+@media (width <= 768px) {
+  .site-title-part {
+    display: block;
+  }
+}

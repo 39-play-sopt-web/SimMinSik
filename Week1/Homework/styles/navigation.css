@@ -1,0 +1,38 @@
+/* 기본 2 */
+.side-navigation {
+  position: sticky;
+  top: 5.5rem;
+  align-self: start;
+}
+
+.side-navigation ul {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.side-navigation a {
+  display: block;
+  padding: 0.875rem 1rem;
+  border: 1px solid var(--gengar-border);
+  border-radius: 0.5rem;
+  background-color: var(--gengar-surface);
+  transition:
+    color 0.2s ease,
+    background-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.side-navigation a:hover {
+  color: #ffffff;
+  background-color: var(--gengar-main);
+  transform: translateX(0.25rem);
+}
+
+/* 심화 2: 첫/마지막 항목 바깥 모서리 처리 */
+.side-navigation li:first-child a {
+  border-radius: 0.75rem 0.75rem 0 0;
+}
+
+.side-navigation li:last-child a {
+  border-radius: 0 0 0.75rem 0.75rem;
+}

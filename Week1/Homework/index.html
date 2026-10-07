@@ -1,0 +1,321 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="PLAY SOPT Web 1주차 HTML, CSS 자기소개 과제"
+    />
+    <title>심민식 | 자기소개</title>
+    <link rel="stylesheet" href="./styles/base.css" />
+    <link rel="stylesheet" href="./styles/header.css" />
+    <link rel="stylesheet" href="./styles/navigation.css" />
+    <link rel="stylesheet" href="./styles/photo-dump.css" />
+    <link rel="stylesheet" href="./styles/photo-album.css" />
+    <link rel="stylesheet" href="./styles/interests.css" />
+    <link rel="stylesheet" href="./styles/to-webtory.css" />
+  </head>
+  <body>
+    <!-- 기본 1 · 심화 1 -->
+    <header class="site-header">
+      <div class="header-profile" aria-label="프로필 영역">
+        <img
+          src="./images/profile-thumbnail.jpg"
+          alt="심민식 프로필 사진"
+        />
+      </div>
+      <h1>
+        <span class="site-title-part">심민식</span>
+        <span class="site-title-part">블로그</span>
+      </h1>
+
+      <nav class="social-links" aria-label="소셜 링크">
+        <a
+          href="https://github.com/minsik1014"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="GitHub 프로필로 이동"
+        >
+          <img src="./images/github.svg" alt="" />
+        </a>
+
+        <a
+          href="https://velog.io/@minsik1014/posts"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Velog 블로그로 이동"
+        >
+          <img src="./images/velog.svg" alt="" />
+        </a>
+
+        <a
+          href="https://portfolio-by-minsik.vercel.app"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="심민식 포트폴리오로 이동"
+        >
+          <img src="./images/pokeball.svg" alt="" />
+        </a>
+      </nav>
+    </header>
+
+    <div class="page-layout">
+      <!-- 기본 2 · 심화 2 -->
+      <aside class="side-navigation">
+        <nav aria-label="페이지 목차">
+          <ul>
+            <li><a href="#photo-dump">포토 덤프</a></li>
+            <li><a href="#photo-album">사진첩</a></li>
+            <li><a href="#interests">관심사</a></li>
+            <li><a href="#to-webtory">To. 웹토리</a></li>
+          </ul>
+        </nav>
+      </aside>
+
+      <main>
+        <!-- 기본 3 · 심화 3 -->
+        <section id="photo-dump">
+          <h2>포토 덤프</h2>
+
+          <div class="photo-dump-grid">
+            <figure class="photo-item photo-item-1">
+              <img
+                src="./images/photo1.jpg"
+                alt="책사진"
+              />
+            </figure>
+            <figure class="photo-item photo-item-2">
+              <img
+                src="./images/photo2.jpg"
+                alt="한강독서사진"
+              />
+            </figure>
+            <figure class="photo-item photo-item-3">
+              <img
+                src="./images/photo4.jpg"
+                alt="데모데이사진"
+              />
+            </figure>
+            <figure class="photo-item photo-item-4">
+              <img
+                src="./images/photo3.jpg"
+                alt="등산사진"
+              />
+            </figure>
+            <figure class="photo-item photo-item-5">
+              <img
+                src="./images/photo5.jpg"
+                alt="강연금사진"
+              />
+            </figure>
+            <figure class="photo-item photo-item-6">
+              <img
+                src="./images/photo6.jpg"
+                alt="거울사진"
+              />
+            </figure>
+          </div>
+        </section>
+
+        <!-- 기본 4 · 심화 4 -->
+        <section id="photo-album">
+          <h2>사진첩</h2>
+
+          <!-- 가로 스크롤 / 무한 루프 분리 -->
+          <h3 class="album-title">가로 방향 스크롤</h3>
+          <div class="album-scroll" aria-label="좋아하는 애니메이션 사진첩">
+            <figure class="album-card">
+              <img
+                src="./images/album-zoro-1.webp"
+                alt="롤로노아 조로 공식 캐릭터 이미지"
+                loading="lazy"
+              />
+            </figure>
+
+            <figure class="album-card">
+              <img
+                src="./images/album-zoro-2.jpg"
+                alt="어린 조로와 쿠이나가 대련하는 애니메이션 장면"
+                loading="lazy"
+              />
+            </figure>
+
+            <figure class="album-card">
+              <img
+                src="./images/album-fullmetal-1.png"
+                alt="강철의 연금술사 공식 애니메이션 이미지"
+                loading="lazy"
+              />
+            </figure>
+
+            <figure class="album-card">
+              <img
+                src="./images/album-fullmetal-2.png"
+                alt="에드워드와 알폰스 엘릭 공식 캐릭터 이미지"
+                loading="lazy"
+              />
+            </figure>
+
+            <figure class="album-card">
+              <img
+                src="./images/album-luffy.webp"
+                alt="몽키 D. 루피 공식 캐릭터 이미지"
+                loading="lazy"
+              />
+            </figure>
+
+            <figure class="album-card">
+              <img
+                src="./images/album-nami.webp"
+                alt="나미 공식 캐릭터 이미지"
+                loading="lazy"
+              />
+            </figure>
+
+            <figure class="album-card">
+              <img
+                src="./images/album-naruto-1.webp"
+                alt="나루토와 7반 공식 애니메이션 이미지"
+                loading="lazy"
+              />
+            </figure>
+
+            <figure class="album-card">
+              <img
+                src="./images/album-naruto-2.webp"
+                alt="나루토 질풍전 공식 애니메이션 이미지"
+                loading="lazy"
+              />
+            </figure>
+          </div>
+
+          <h3 class="album-title">무한 루프 배너</h3>
+          <div class="album-marquee" aria-label="가로로 자동 반복되는 애니메이션 사진첩">
+            <div class="album-marquee-track">
+              <div class="album-marquee-group">
+                <img src="./images/album-zoro-1.webp" alt="롤로노아 조로" />
+                <img src="./images/album-zoro-2.jpg" alt="조로와 쿠이나" />
+                <img src="./images/album-fullmetal-1.png" alt="강철의 연금술사" />
+                <img src="./images/album-fullmetal-2.png" alt="엘릭 형제" />
+                <img src="./images/album-luffy.webp" alt="몽키 D. 루피" />
+                <img src="./images/album-nami.webp" alt="나미" />
+                <img src="./images/album-naruto-1.webp" alt="나루토 7반" />
+                <img src="./images/album-naruto-2.webp" alt="나루토 질풍전" />
+              </div>
+
+              <!-- 같은 사진 묶음 복제 -->
+              <div class="album-marquee-group" aria-hidden="true">
+                <img src="./images/album-zoro-1.webp" alt="" />
+                <img src="./images/album-zoro-2.jpg" alt="" />
+                <img src="./images/album-fullmetal-1.png" alt="" />
+                <img src="./images/album-fullmetal-2.png" alt="" />
+                <img src="./images/album-luffy.webp" alt="" />
+                <img src="./images/album-nami.webp" alt="" />
+                <img src="./images/album-naruto-1.webp" alt="" />
+                <img src="./images/album-naruto-2.webp" alt="" />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 기본 5 · 심화 5 -->
+        <section id="interests">
+          <h2>관심사</h2>
+
+          <div class="interest-grid">
+            <article class="interest-card">
+              <img src="./images/interest-gengar.png" alt="포켓몬 팬텀" loading="lazy" />
+              <h3>포켓몬 · 팬텀</h3>
+              <div class="interest-actions">
+                <button type="button" class="like-button">좋아요</button>
+                <button type="button" class="dislike-button">싫어요</button>
+              </div>
+            </article>
+
+            <article class="interest-card">
+              <img src="./images/album-luffy.webp" alt="원피스 루피" loading="lazy" />
+              <h3>애니 · 원피스</h3>
+              <div class="interest-actions">
+                <button type="button" class="like-button">좋아요</button>
+                <button type="button" class="dislike-button">싫어요</button>
+              </div>
+            </article>
+
+            <article class="interest-card">
+              <img
+                src="./images/album-fullmetal-2.png"
+                alt="강철의 연금술사 엘릭 형제"
+                loading="lazy"
+              />
+              <h3>애니 · 강철의 연금술사</h3>
+              <div class="interest-actions">
+                <button type="button" class="like-button">좋아요</button>
+                <button type="button" class="dislike-button">싫어요</button>
+              </div>
+            </article>
+
+            <article class="interest-card">
+              <img src="./images/interest-demian.jpg" alt="민음사 데미안 표지" loading="lazy" />
+              <h3>책 · 데미안</h3>
+              <div class="interest-actions">
+                <button type="button" class="like-button">좋아요</button>
+                <button type="button" class="dislike-button">싫어요</button>
+              </div>
+            </article>
+
+            <article class="interest-card">
+              <img
+                src="./images/interest-rhinoceros.jpg"
+                alt="민음사 코뿔소 표지"
+                loading="lazy"
+              />
+              <h3>책 · 코뿔소</h3>
+              <div class="interest-actions">
+                <button type="button" class="like-button">좋아요</button>
+                <button type="button" class="dislike-button">싫어요</button>
+              </div>
+            </article>
+
+            <article class="interest-card">
+              <img src="./images/interest-1984.jpg" alt="민음사 1984 표지" loading="lazy" />
+              <h3>책 · 1984</h3>
+              <div class="interest-actions">
+                <button type="button" class="like-button">좋아요</button>
+                <button type="button" class="dislike-button">싫어요</button>
+              </div>
+            </article>
+
+            <article class="interest-card">
+              <img
+                src="./images/interest-clockwork-orange.jpg"
+                alt="민음사 시계태엽 오렌지 표지"
+                loading="lazy"
+              />
+              <h3>책 · 시계태엽 오렌지</h3>
+              <div class="interest-actions">
+                <button type="button" class="like-button">좋아요</button>
+                <button type="button" class="dislike-button">싫어요</button>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <!-- 기본 6 -->
+        <section id="to-webtory">
+          <h2>To. 웹토리</h2>
+          <p class="webtory-message">
+            <span>
+              등가교환이다! 시간과 웹 실력을 등가교환하겠습니다!<br />
+              여러분들도 좋은 등가교환 하시길 바라겠습니다!
+            </span>
+          </p>
+        </section>
+      </main>
+    </div>
+
+    <footer>
+      <p>&copy; 2026 Sim Min Sik</p>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,85 @@
+/* 기본 4 */
+.album-title {
+  margin-block: 2rem 1rem;
+  color: var(--gengar-main);
+  font-size: 1rem;
+}
+
+.album-scroll {
+  display: flex;
+  gap: 1rem;
+  padding-block: 0.25rem 1rem;
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+  scroll-padding-inline: 0.25rem;
+  scroll-snap-type: inline mandatory;
+  scrollbar-width: none;
+}
+
+.album-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.album-card {
+  flex: 0 0 clamp(15rem, 38vw, 21rem);
+  margin: 0;
+  overflow: hidden;
+  border: 1px solid var(--gengar-border);
+  border-radius: 0.75rem;
+  background-color: var(--gengar-surface);
+  scroll-snap-align: start;
+}
+
+.album-card img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+
+/* 심화 4: 첫 묶음 뒤에 복사본 이어짐 */
+.album-marquee {
+  overflow: hidden;
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000 5%,
+    #000 95%,
+    transparent
+  );
+}
+
+.album-marquee-track {
+  display: flex;
+  width: max-content;
+  animation: album-loop 20s linear infinite;
+}
+
+.album-marquee-group {
+  display: flex;
+  flex-shrink: 0;
+  gap: 0.75rem;
+  padding-right: 0.75rem;
+}
+
+.album-marquee-group img {
+  width: 14rem;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 0.75rem;
+}
+
+@keyframes album-loop {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (width <= 768px) {
+  .album-card {
+    flex-basis: 78vw;
+  }
+
+  .album-marquee-group img {
+    width: 12rem;
+  }
+}
