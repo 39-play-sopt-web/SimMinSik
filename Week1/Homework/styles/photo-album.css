@@ -1,5 +1,5 @@
 /* 기본 4 */
-#photo-album h3 {
+.album-title {
   margin-block: 2rem 1rem;
   color: var(--gengar-main);
   font-size: 1rem;
