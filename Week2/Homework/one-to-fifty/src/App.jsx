@@ -22,6 +22,11 @@ export default function App() {
     setMenu(nextMenu);
   }
 
+  function handleGameComplete() {
+    const finalTime = stopTimer();
+    window.alert(`게임 완료! 걸린 시간: ${finalTime.toFixed(2)}초`);
+  }
+
   return (
     <Page>
       <Header
@@ -33,7 +38,7 @@ export default function App() {
       />
       <main>
         {menu === 'game' ? (
-          <GameBoard onStart={startTimer} onComplete={stopTimer} onReset={resetTimer} />
+          <GameBoard onStart={startTimer} onComplete={handleGameComplete} onReset={resetTimer} />
         ) : <Ranking />}
       </main>
     </Page>

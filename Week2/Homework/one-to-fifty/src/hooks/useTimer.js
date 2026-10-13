@@ -10,6 +10,7 @@ export default function useTimer() {
 
     // 횟수를 더하지 않고 시작 시각과의 차이로 측정
     const intervalId = setInterval(() => {
+      if (startedAt.current === null) return;
       setElapsedTime((performance.now() - startedAt.current) / 1000);
     }, 10);
 
@@ -25,8 +26,10 @@ export default function useTimer() {
   function stopTimer() {
     if (startedAt.current === null) return;
 
-    setElapsedTime((performance.now() - startedAt.current) / 1000);
+    const finalTime = (performance.now() - startedAt.current) / 1000;
+    setElapsedTime(finalTime);
     setIsRunning(false);
+    return finalTime;
   }
 
   function resetTimer() {

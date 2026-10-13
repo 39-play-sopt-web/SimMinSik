@@ -44,13 +44,17 @@ export default function GameBoard({ onStart, onComplete, onReset }) {
   const [numbers, setNumbers] = useState(() => shuffleNumbers());
   const [remainingNumbers, setRemainingNumbers] = useState(() => shuffleNumbers(10));
   const [nextNumber, setNextNumber] = useState(1);
-  const isComplete = nextNumber > 18;
 
   function handleNumberClick(number, cellIndex) {
-    if (number !== nextNumber || isComplete) return;
+    if (number !== nextNumber) return;
 
     if (number === 1) onStart();
-    if (number === 18) onComplete();
+    if (number === 18) {
+      onComplete();
+      // 종료 알림 확인 후 새 판으로 초기화
+      resetGame();
+      return;
+    }
 
     // 앞쪽 숫자를 누른 자리에 뒤쪽 숫자를 하나씩 채움
     const replacement = number <= 9 ? remainingNumbers[number - 1] : null;
@@ -72,7 +76,7 @@ export default function GameBoard({ onStart, onComplete, onReset }) {
     <Section aria-labelledby="game-title">
       <h1 id="game-title">1 to 50</h1>
       <p aria-live="polite">
-        {isComplete ? '완료!' : <>다음 숫자: <strong>{nextNumber}</strong></>}
+        다음 숫자: <strong>{nextNumber}</strong>
       </p>
       <Board>
         {numbers.map((number, index) => (
@@ -86,7 +90,6 @@ export default function GameBoard({ onStart, onComplete, onReset }) {
           </Cell>
         ))}
       </Board>
-      {isComplete && <button type="button" onClick={resetGame}>다시 시작</button>}
     </Section>
   );
 }
