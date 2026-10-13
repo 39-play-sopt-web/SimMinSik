@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { useState } from 'react';
 
 const Section = styled.section`
   max-width: 420px;
@@ -23,17 +24,65 @@ const Cell = styled.button`
   font-weight: 700;
 `;
 
-// 숫자 배치와 클릭 로직은 다음 단계에서 연결
-const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+// 숫자 섞기
+function shuffleNumbers(start = 1) {
+  const numbers = Array.from({ length: 9 }, (_, index) => start + index);
+
+  for (let i = numbers.length - 1; i > 0; i--) {
+    const randomIndex = Math.floor(Math.random() * (i + 1));
+
+    [numbers[i], numbers[randomIndex]] = [
+      numbers[randomIndex],
+      numbers[i],
+    ];
+  }
+
+  return numbers;
+}
 
 export default function GameBoard() {
+  const [numbers, setNumbers] = useState(() => shuffleNumbers());
+  const [remainingNumbers, setRemainingNumbers] = useState(() => shuffleNumbers(10));
+  const [nextNumber, setNextNumber] = useState(1);
+  const isComplete = nextNumber > 18;
+
+  function handleNumberClick(number, cellIndex) {
+    if (number !== nextNumber || isComplete) return;
+
+    // 앞쪽 숫자를 누른 자리에 뒤쪽 숫자를 하나씩 채움
+    const replacement = number <= 9 ? remainingNumbers[number - 1] : null;
+
+    setNumbers((previous) => previous.map((value, index) => (
+      index === cellIndex ? replacement : value
+    )));
+    setNextNumber((previous) => previous + 1);
+  }
+
+  function resetGame() {
+    setNumbers(shuffleNumbers());
+    setRemainingNumbers(shuffleNumbers(10));
+    setNextNumber(1);
+  }
+
   return (
     <Section aria-labelledby="game-title">
       <h1 id="game-title">1 to 50</h1>
-      <p>다음 숫자: <strong>1</strong></p>
+      <p aria-live="polite">
+        {isComplete ? '완료!' : <>다음 숫자: <strong>{nextNumber}</strong></>}
+      </p>
       <Board>
-        {numbers.map((number) => <Cell key={number} type="button">{number}</Cell>)}
+        {numbers.map((number, index) => (
+          <Cell
+            key={index}
+            type="button"
+            disabled={number === null}
+            onClick={() => handleNumberClick(number, index)}
+          >
+            {number}
+          </Cell>
+        ))}
       </Board>
+      {isComplete && <button type="button" onClick={resetGame}>다시 시작</button>}
     </Section>
   );
 }
