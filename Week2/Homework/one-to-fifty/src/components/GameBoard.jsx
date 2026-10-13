@@ -50,7 +50,8 @@ export default function GameBoard({ onStart, onComplete, onReset }) {
 
     if (number === 1) onStart();
     if (number === 18) {
-      onComplete();
+      // 현재 실제 게임판은 Level 1
+      onComplete(1);
       // 종료 알림 확인 후 새 판으로 초기화
       resetGame();
       return;
