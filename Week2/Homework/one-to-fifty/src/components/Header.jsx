@@ -36,7 +36,7 @@ const Timer = styled.output`
   font-variant-numeric: tabular-nums;
 `;
 
-export default function Header({ menu, onMenuChange, level, onLevelChange }) {
+export default function Header({ menu, onMenuChange, level, onLevelChange, elapsedTime }) {
   return (
     <Container>
       <Group as="nav" aria-label="메인 메뉴">
@@ -55,7 +55,9 @@ export default function Header({ menu, onMenuChange, level, onLevelChange }) {
             <option value="2">Level 2</option>
             <option value="3">Level 3</option>
           </LevelSelect>
-          <Timer aria-label="플레이 시간">0.00초</Timer>
+          <Timer role="timer" aria-live="off" aria-label="플레이 시간">
+            {elapsedTime.toFixed(2)}초
+          </Timer>
         </Group>
       )}
     </Container>

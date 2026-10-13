@@ -40,7 +40,7 @@ function shuffleNumbers(start = 1) {
   return numbers;
 }
 
-export default function GameBoard() {
+export default function GameBoard({ onStart, onComplete, onReset }) {
   const [numbers, setNumbers] = useState(() => shuffleNumbers());
   const [remainingNumbers, setRemainingNumbers] = useState(() => shuffleNumbers(10));
   const [nextNumber, setNextNumber] = useState(1);
@@ -48,6 +48,9 @@ export default function GameBoard() {
 
   function handleNumberClick(number, cellIndex) {
     if (number !== nextNumber || isComplete) return;
+
+    if (number === 1) onStart();
+    if (number === 18) onComplete();
 
     // 앞쪽 숫자를 누른 자리에 뒤쪽 숫자를 하나씩 채움
     const replacement = number <= 9 ? remainingNumbers[number - 1] : null;
@@ -59,6 +62,7 @@ export default function GameBoard() {
   }
 
   function resetGame() {
+    onReset();
     setNumbers(shuffleNumbers());
     setRemainingNumbers(shuffleNumbers(10));
     setNextNumber(1);
