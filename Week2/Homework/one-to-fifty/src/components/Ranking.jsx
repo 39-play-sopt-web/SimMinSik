@@ -1,10 +1,30 @@
 import styled from '@emotion/styled';
 import { useState } from 'react';
-import { loadGameRecords } from '../utils/gameRecords';
+import { clearGameRecords, loadGameRecords } from '../utils/gameRecords';
 
 const Section = styled.section`
   padding: 40px 0;
   text-align: center;
+`;
+
+const Heading = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 24px;
+`;
+
+const ResetButton = styled.button`
+  padding: 10px 16px;
+  border: 1px solid #ded9e6;
+  border-radius: 8px;
+  background: #fff;
+  color: #624589;
+
+  &:hover {
+    background: #e9e4ef;
+  }
 `;
 
 const TableContainer = styled.div`
@@ -32,7 +52,7 @@ const Table = styled.table`
 `;
 
 export default function Ranking() {
-  const [{ records, error }] = useState(() => {
+  const [{ records, error }, setRanking] = useState(() => {
     try {
       return { records: loadGameRecords(), error: '' };
     } catch {
@@ -43,9 +63,24 @@ export default function Ranking() {
   // 원본 배열은 유지하고 복사본만 시간순 정렬
   const sortedRecords = [...records].sort((a, b) => a.playTime - b.playTime);
 
+  function handleReset() {
+    try {
+      clearGameRecords();
+      setRanking({ records: [], error: '' });
+    } catch {
+      setRanking((previous) => ({
+        ...previous,
+        error: '기록을 초기화하지 못했습니다.',
+      }));
+    }
+  }
+
   return (
     <Section aria-labelledby="ranking-title">
-      <h1 id="ranking-title">랭킹</h1>
+      <Heading>
+        <h1 id="ranking-title">랭킹</h1>
+        <ResetButton type="button" onClick={handleReset}>초기화</ResetButton>
+      </Heading>
       {error ? (
         <p role="alert">{error}</p>
       ) : sortedRecords.length === 0 ? (

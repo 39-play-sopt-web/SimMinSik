@@ -1,5 +1,9 @@
 const STORAGE_KEY = 'one-to-fifty-records';
 
+export function clearGameRecords() {
+  localStorage.removeItem(STORAGE_KEY);
+}
+
 export function loadGameRecords() {
   const savedRecords = localStorage.getItem(STORAGE_KEY);
   if (!savedRecords) return [];
