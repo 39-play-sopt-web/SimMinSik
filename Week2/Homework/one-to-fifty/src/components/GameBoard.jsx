@@ -41,11 +41,11 @@ function shuffleNumbers(count, start = 1) {
   return numbers;
 }
 
-export default function GameBoard({ level, onStart, onComplete, onReset }) {
+export default function GameBoard({ level, onStart, onComplete }) {
   const { size, total } = LEVEL_CONFIG[level];
   const half = total / 2;
   const [numbers, setNumbers] = useState(() => shuffleNumbers(half));
-  const [remainingNumbers, setRemainingNumbers] = useState(() => shuffleNumbers(half, half + 1));
+  const [remainingNumbers] = useState(() => shuffleNumbers(half, half + 1));
   const [nextNumber, setNextNumber] = useState(1);
 
   function handleNumberClick(number, cellIndex) {
@@ -53,9 +53,8 @@ export default function GameBoard({ level, onStart, onComplete, onReset }) {
 
     if (number === 1) onStart();
     if (number === total) {
+      setNextNumber(total + 1);
       onComplete(Number(level));
-      // 종료 알림 확인 후 새 판으로 초기화
-      resetGame();
       return;
     }
 
@@ -68,18 +67,11 @@ export default function GameBoard({ level, onStart, onComplete, onReset }) {
     setNextNumber((previous) => previous + 1);
   }
 
-  function resetGame() {
-    onReset();
-    setNumbers(shuffleNumbers(half));
-    setRemainingNumbers(shuffleNumbers(half, half + 1));
-    setNextNumber(1);
-  }
-
   return (
     <Section aria-labelledby="game-title">
       <h1 id="game-title">1 to 50</h1>
       <p aria-live="polite">
-        다음 숫자: <strong>{nextNumber}</strong>
+        {nextNumber > total ? '완료!' : <>다음 숫자: <strong>{nextNumber}</strong></>}
       </p>
       <Board size={size}>
         {numbers.map((number, index) => (

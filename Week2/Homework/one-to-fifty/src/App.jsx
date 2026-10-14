@@ -3,6 +3,7 @@ import styled from '@emotion/styled';
 import Header from './components/Header';
 import GameBoard from './components/GameBoard';
 import Ranking from './components/Ranking';
+import ResultModal from './components/ResultModal';
 import useTimer from './hooks/useTimer';
 import { saveGameRecord } from './utils/gameRecords';
 
@@ -15,6 +16,8 @@ const Page = styled.div`
 export default function App() {
   const [menu, setMenu] = useState('game');
   const [level, setLevel] = useState('1');
+  const [result, setResult] = useState(null);
+  const [gameId, setGameId] = useState(0);
   const { elapsedTime, startTimer, stopTimer, resetTimer } = useTimer();
 
   function handleMenuChange(nextMenu) {
@@ -25,15 +28,21 @@ export default function App() {
 
   function handleGameComplete(completedLevel) {
     const finalTime = stopTimer();
-    let message = `게임 완료! 걸린 시간: ${finalTime.toFixed(2)}초`;
+    let saveError = '';
 
     try {
       saveGameRecord(completedLevel, finalTime);
     } catch {
-      message += '\n기록을 저장하지 못했습니다.';
+      saveError = '기록을 저장하지 못했습니다.';
     }
 
-    window.alert(message);
+    setResult({ level: completedLevel, playTime: finalTime, saveError });
+  }
+
+  function handleResultConfirm() {
+    resetTimer();
+    setResult(null);
+    setGameId((previous) => previous + 1);
   }
 
   function handleLevelChange(nextLevel) {
@@ -54,14 +63,14 @@ export default function App() {
       <main>
         {menu === 'game' ? (
           <GameBoard
-            key={level}
+            key={`${level}-${gameId}`}
             level={level}
             onStart={startTimer}
             onComplete={handleGameComplete}
-            onReset={resetTimer}
           />
         ) : <Ranking />}
       </main>
+      {result && <ResultModal result={result} onConfirm={handleResultConfirm} />}
     </Page>
   );
 }
