@@ -23,6 +23,33 @@ const Cell = styled.button`
   color: #624589;
   font-size: 28px;
   font-weight: 700;
+  transition: transform 120ms ease, background-color 120ms ease, color 120ms ease;
+
+  @media (hover: hover) {
+    &:hover:not(:disabled) {
+      background: #e9e4ef;
+    }
+  }
+
+  &:active:not(:disabled) {
+    transform: scale(0.94);
+    background: #624589;
+    color: #fff;
+  }
+
+  &:disabled {
+    background: transparent;
+    border-color: transparent;
+    cursor: default;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+
+    &:active:not(:disabled) {
+      transform: none;
+    }
+  }
 `;
 
 // 숫자 섞기
