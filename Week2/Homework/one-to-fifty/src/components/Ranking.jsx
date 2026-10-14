@@ -60,8 +60,10 @@ export default function Ranking() {
     }
   });
 
-  // 원본 배열은 유지하고 복사본만 시간순 정렬
-  const sortedRecords = [...records].sort((a, b) => a.playTime - b.playTime);
+  // 높은 레벨 우선, 같은 레벨이면 빠른 기록 우선
+  const sortedRecords = [...records].sort((a, b) => (
+    b.level - a.level || a.playTime - b.playTime
+  ));
 
   function handleReset() {
     try {
@@ -81,6 +83,7 @@ export default function Ranking() {
         <h1 id="ranking-title">랭킹</h1>
         <ResetButton type="button" onClick={handleReset}>초기화</ResetButton>
       </Heading>
+      <p>높은 레벨부터, 같은 레벨에서는 빠른 기록부터 표시됩니다.</p>
       {error ? (
         <p role="alert">{error}</p>
       ) : sortedRecords.length === 0 ? (
