@@ -36,18 +36,30 @@ export default function App() {
     window.alert(message);
   }
 
+  function handleLevelChange(nextLevel) {
+    if (nextLevel === level) return;
+    resetTimer();
+    setLevel(nextLevel);
+  }
+
   return (
     <Page>
       <Header
         menu={menu}
         onMenuChange={handleMenuChange}
         level={level}
-        onLevelChange={setLevel}
+        onLevelChange={handleLevelChange}
         elapsedTime={elapsedTime}
       />
       <main>
         {menu === 'game' ? (
-          <GameBoard onStart={startTimer} onComplete={handleGameComplete} onReset={resetTimer} />
+          <GameBoard
+            key={level}
+            level={level}
+            onStart={startTimer}
+            onComplete={handleGameComplete}
+            onReset={resetTimer}
+          />
         ) : <Ranking />}
       </main>
     </Page>
