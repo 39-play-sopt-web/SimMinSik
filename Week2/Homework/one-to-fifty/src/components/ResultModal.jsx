@@ -14,6 +14,10 @@ const Dialog = styled.dialog`
   &::backdrop {
     background: #29243399;
   }
+
+  @media (width <= 480px) {
+    padding: 24px;
+  }
 `;
 
 const Time = styled.p`

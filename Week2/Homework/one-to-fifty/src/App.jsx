@@ -10,7 +10,7 @@ import { saveGameRecord } from './utils/gameRecords';
 const Page = styled.div`
   max-width: 800px;
   margin: 0 auto;
-  padding: 24px;
+  padding: clamp(16px, 4vw, 24px);
 `;
 
 export default function App() {

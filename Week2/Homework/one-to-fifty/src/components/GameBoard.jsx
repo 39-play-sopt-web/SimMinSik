@@ -6,6 +6,10 @@ const Section = styled.section`
   max-width: 420px;
   margin: 40px auto;
   text-align: center;
+
+  @media (width <= 480px) {
+    margin: 24px auto;
+  }
 `;
 
 const Board = styled.div`
@@ -13,15 +17,21 @@ const Board = styled.div`
   grid-template-columns: repeat(${({ size }) => size}, 1fr);
   gap: 12px;
   margin-top: 24px;
+
+  @media (width <= 480px) {
+    gap: 8px;
+  }
 `;
 
 const Cell = styled.button`
   aspect-ratio: 1;
+  min-width: 0;
+  padding: 0;
   border: 1px solid #ded9e6;
   border-radius: 12px;
   background: #fff;
   color: #624589;
-  font-size: 28px;
+  font-size: clamp(20px, 5vw, 28px);
   font-weight: 700;
   transition: transform 120ms ease, background-color 120ms ease, color 120ms ease;
 

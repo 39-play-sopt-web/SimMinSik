@@ -5,6 +5,10 @@ import { clearGameRecords, loadGameRecords } from '../utils/gameRecords';
 const Section = styled.section`
   padding: 40px 0;
   text-align: center;
+
+  @media (width <= 480px) {
+    padding: 24px 0;
+  }
 `;
 
 const Heading = styled.div`
@@ -22,17 +26,27 @@ const ResetButton = styled.button`
   background: #fff;
   color: #624589;
 
-  &:hover {
-    background: #e9e4ef;
+  @media (hover: hover) {
+    &:hover {
+      background: #e9e4ef;
+    }
   }
 `;
 
 const TableContainer = styled.div`
   overflow-x: auto;
+  border: 1px solid #ded9e6;
+  border-radius: 12px;
+
+  &:focus-visible {
+    outline: 3px solid #8565b3;
+    outline-offset: 3px;
+  }
 `;
 
 const Table = styled.table`
   width: 100%;
+  min-width: 520px;
   border-collapse: collapse;
   background: #fff;
 
@@ -48,6 +62,13 @@ const Table = styled.table`
 
   td:last-child {
     font-variant-numeric: tabular-nums;
+  }
+
+  @media (width <= 480px) {
+    th, td {
+      padding: 12px;
+      font-size: 14px;
+    }
   }
 `;
 
@@ -89,7 +110,7 @@ export default function Ranking() {
       ) : sortedRecords.length === 0 ? (
         <p>아직 기록이 없어요.</p>
       ) : (
-        <TableContainer>
+        <TableContainer tabIndex={0} role="region" aria-label="랭킹 기록, 작은 화면에서는 가로 스크롤">
           <Table aria-labelledby="ranking-title">
             <thead>
               <tr>

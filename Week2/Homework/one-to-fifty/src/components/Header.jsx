@@ -16,6 +16,14 @@ const Group = styled.div`
   gap: 12px;
 `;
 
+const GameControls = styled(Group)`
+  @media (width <= 480px) {
+    width: 100%;
+    justify-content: space-between;
+    gap: 8px;
+  }
+`;
+
 const MenuButton = styled.button`
   padding: 10px 16px;
   border: 0;
@@ -34,6 +42,8 @@ const LevelSelect = styled.select`
 const Timer = styled.output`
   min-width: 72px;
   font-variant-numeric: tabular-nums;
+  text-align: right;
+  white-space: nowrap;
 `;
 
 export default function Header({ menu, onMenuChange, level, onLevelChange, elapsedTime }) {
@@ -48,7 +58,7 @@ export default function Header({ menu, onMenuChange, level, onLevelChange, elaps
         </MenuButton>
       </Group>
       {menu === 'game' && (
-        <Group>
+        <GameControls>
           <label htmlFor="level">레벨</label>
           <LevelSelect id="level" value={level} onChange={(event) => onLevelChange(event.target.value)}>
             <option value="1">Level 1</option>
@@ -58,7 +68,7 @@ export default function Header({ menu, onMenuChange, level, onLevelChange, elaps
           <Timer role="timer" aria-live="off" aria-label="플레이 시간">
             {elapsedTime.toFixed(2)}초
           </Timer>
-        </Group>
+        </GameControls>
       )}
     </Container>
   );
