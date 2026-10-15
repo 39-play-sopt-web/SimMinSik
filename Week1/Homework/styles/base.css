@@ -7,6 +7,7 @@
   --gengar-surface: #f8f4fb;
   --gengar-border: #d8c9e5;
   --gengar-accent: #d95f9f;
+  --gengar-background: #fcfaff;
 
   font-family:
     Pretendard,
@@ -15,7 +16,7 @@
     "Segoe UI",
     sans-serif;
   color: var(--gengar-dark);
-  background-color: #fcfaff;
+  background-color: var(--gengar-background);
   font-synthesis: none;
 }
 

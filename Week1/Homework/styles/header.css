@@ -10,7 +10,8 @@
   width: min(100% - 2rem, 1200px);
   min-height: 4.5rem;
   margin-inline: auto;
-  background-color: #fcfaff;
+  border-bottom: 1px solid var(--gengar-border);
+  background-color: var(--gengar-background);
   transform: translateX(-50%);
 }
 
@@ -68,5 +69,20 @@
 @media (width <= 768px) {
   .site-title-part {
     display: block;
+  }
+
+  /* 3등분 유지하면서 아이콘 겹침 방지 */
+  .social-links {
+    gap: 0.25rem;
+  }
+
+  .social-links a {
+    flex-shrink: 0;
+    padding: 0.25rem;
+  }
+
+  .social-links img {
+    width: 1.25rem;
+    height: 1.25rem;
   }
 }
