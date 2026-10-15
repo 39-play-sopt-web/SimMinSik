@@ -23,11 +23,6 @@
   transition: box-shadow 0.2s ease;
 }
 
-/* 심화 1 */
-.header-profile img:hover {
-  box-shadow: 0 0.25rem 1rem rgb(111 76 143 / 35%);
-}
-
 .site-header h1 {
   margin: 0;
   color: var(--gengar-main);
@@ -61,9 +56,16 @@
     transform 0.2s ease;
 }
 
-.social-links a:hover {
-  background-color: var(--gengar-soft);
-  transform: translateY(-0.125rem);
+/* 심화 1: 터치 화면에서는 hover 효과 제외 */
+@media (hover: hover) {
+  .header-profile img:hover {
+    box-shadow: 0 0.25rem 1rem rgb(111 76 143 / 35%);
+  }
+
+  .social-links a:hover {
+    background-color: var(--gengar-soft);
+    transform: translateY(-0.125rem);
+  }
 }
 
 @media (width <= 768px) {

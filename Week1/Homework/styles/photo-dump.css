@@ -54,6 +54,8 @@
 }
 
 /* 심화 3: 카드 밖 이미지 숨김 */
-.photo-item:hover img {
-  transform: scale(1.08);
+@media (hover: hover) {
+  .photo-item:hover img {
+    transform: scale(1.08);
+  }
 }

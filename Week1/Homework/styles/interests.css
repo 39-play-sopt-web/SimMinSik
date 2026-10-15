@@ -51,21 +51,23 @@
 }
 
 /* 심화 5 */
-.interest-card:hover {
-  box-shadow: 0 0.75rem 1.5rem rgb(59 41 79 / 18%);
-  transform: translateY(-0.375rem);
-}
+@media (hover: hover) {
+  .interest-card:hover {
+    box-shadow: 0 0.75rem 1.5rem rgb(59 41 79 / 18%);
+    transform: translateY(-0.375rem);
+  }
 
-.like-button:hover {
-  border-color: var(--gengar-main);
-  color: #ffffff;
-  background-color: var(--gengar-main);
-}
+  .like-button:hover {
+    border-color: var(--gengar-main);
+    color: #ffffff;
+    background-color: var(--gengar-main);
+  }
 
-.dislike-button:hover {
-  border-color: var(--gengar-accent);
-  color: #ffffff;
-  background-color: var(--gengar-accent);
+  .dislike-button:hover {
+    border-color: var(--gengar-accent);
+    color: #ffffff;
+    background-color: var(--gengar-accent);
+  }
 }
 
 @media (width <= 1100px) {
