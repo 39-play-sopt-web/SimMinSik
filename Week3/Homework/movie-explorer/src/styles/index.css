@@ -1,0 +1,9 @@
+@import "tailwindcss";
+
+/* 테마 색상은 Tailwind 클래스에서도 사용 */
+@theme inline {
+  --color-page: var(--app-background);
+  --color-foreground: var(--app-text);
+  --color-muted: var(--app-muted);
+  --color-accent: var(--app-accent);
+}
