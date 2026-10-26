@@ -1,21 +1,43 @@
 import { Link, useParams } from 'react-router';
+import MovieOverview from '../components/movie/MovieOverview';
+import { useMovieDetail } from '../hooks/useMovieDetail';
+
+function MovieDetailContent({ movieId }: { movieId: number }) {
+  const { movie, isLoading, error, retry } = useMovieDetail(movieId);
+
+  if (isLoading) return <p role="status" className="py-16 text-center text-muted">영화 정보를 불러오는 중입니다.</p>;
+  if (error) {
+    return (
+      <div className="py-16 text-center">
+        <p role="alert" className="text-red-700">{error}</p>
+        <button type="button" onClick={retry} className="mt-4 rounded-lg bg-accent px-4 py-2 font-semibold text-white hover:opacity-90">
+          다시 시도
+        </button>
+      </div>
+    );
+  }
+  return movie ? <MovieOverview movie={movie} /> : null;
+}
 
 export default function MovieDetailPage() {
   const { movieId } = useParams<{ movieId: string }>();
+  const id = Number(movieId);
+  const isValidId = /^\d+$/.test(movieId ?? '') && Number.isSafeInteger(id) && id > 0 && id <= 2147483647;
 
   return (
-    <section aria-labelledby="movie-detail-title">
+    <section aria-label="영화 상세">
       <Link
         to="/"
         className="inline-flex rounded text-sm font-semibold text-accent hover:underline focus-visible:outline-2 focus-visible:outline-offset-4"
       >
         ← 목록으로 돌아가기
       </Link>
-      <h1 id="movie-detail-title" className="mt-6 text-3xl font-bold sm:text-4xl">영화 상세</h1>
-      <p className="mt-3 text-muted">현재 영화 ID: {movieId}</p>
-      <div className="mt-8 rounded-2xl border border-slate-200 bg-white p-6">
-        <p className="text-muted">이 ID를 사용해 영화 상세 정보를 조회할 예정입니다.</p>
-      </div>
+      {isValidId ? (
+        // 다른 영화로 이동하면 이전 상세 상태도 초기화
+        <MovieDetailContent key={id} movieId={id} />
+      ) : (
+        <p role="alert" className="py-16 text-center text-red-700">올바른 영화 주소가 아닙니다.</p>
+      )}
     </section>
   );
 }

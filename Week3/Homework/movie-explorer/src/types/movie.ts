@@ -18,3 +18,11 @@ export interface RatingRange {
   min: number;
   max: number;
 }
+
+export interface MovieDetail extends Movie {
+  backdrop_path: string | null;
+  genres: { id: number; name: string }[];
+  runtime: number | null;
+  vote_count: number;
+  status: string;
+}
