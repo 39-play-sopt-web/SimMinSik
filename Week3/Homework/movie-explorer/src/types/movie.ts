@@ -13,3 +13,8 @@ export interface MovieListResponse {
   total_pages: number;
   total_results: number;
 }
+
+export interface RatingRange {
+  min: number;
+  max: number;
+}

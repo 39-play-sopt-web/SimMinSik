@@ -1,13 +1,15 @@
 import MovieCard from '../components/movie/MovieCard';
+import RatingFilter from '../components/movie/RatingFilter';
 import { useMovies } from '../hooks/useMovies';
 
 export default function MovieListPage() {
-  const { movies, isLoading, error, retry } = useMovies();
+  const { movies, isLoading, error, retry, rating, changeRating } = useMovies();
 
   return (
     <section aria-labelledby="movie-list-title">
       <h1 id="movie-list-title" className="text-3xl font-bold sm:text-4xl">영화 목록</h1>
       <p className="mt-3 text-muted">별점으로 영화를 고르고, 상세 정보를 확인해보세요.</p>
+      <RatingFilter rating={rating} onChange={changeRating} />
       {isLoading ? (
         <p role="status" className="py-16 text-center text-muted">영화를 불러오는 중입니다.</p>
       ) : error ? (

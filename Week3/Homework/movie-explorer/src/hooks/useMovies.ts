@@ -1,21 +1,26 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { getMovies } from '../api/movies';
-import type { Movie } from '../types/movie';
+import type { Movie, RatingRange } from '../types/movie';
 
 export function useMovies() {
   const [movies, setMovies] = useState<Movie[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState('');
   const [retryCount, setRetryCount] = useState(0);
+  const [rating, setRating] = useState<RatingRange>({ min: 0, max: 10 });
+  const { min, max } = rating;
 
   useEffect(() => {
     const controller = new AbortController();
 
     async function loadMovies() {
       try {
-        const data = await getMovies(controller.signal);
-        if (!controller.signal.aborted) setMovies(data.results);
+        const data = await getMovies({ min, max }, controller.signal);
+        if (!controller.signal.aborted) {
+          // API 응답에 범위 밖 평점이 포함되는 경우도 제외
+          setMovies(data.results.filter((movie) => movie.vote_average >= min && movie.vote_average <= max));
+        }
       } catch (error: unknown) {
         if (controller.signal.aborted) return;
 
@@ -32,9 +37,16 @@ export function useMovies() {
     }
 
     void loadMovies();
-    // 페이지를 떠나면 요청도 취소
+    // 필터가 바뀌거나 페이지를 떠나면 이전 요청 취소
     return () => controller.abort();
-  }, [retryCount]);
+  }, [retryCount, min, max]);
+
+  function changeRating(nextRating: RatingRange) {
+    if (nextRating.min === min && nextRating.max === max) return;
+    setError('');
+    setIsLoading(true);
+    setRating(nextRating);
+  }
 
   function retry() {
     setError('');
@@ -42,5 +54,5 @@ export function useMovies() {
     setRetryCount((count) => count + 1);
   }
 
-  return { movies, isLoading, error, retry };
+  return { movies, isLoading, error, retry, rating, changeRating };
 }
