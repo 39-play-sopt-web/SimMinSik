@@ -46,11 +46,18 @@ export default function MovieOverview({ movie }: MovieOverviewProps) {
               onError={() => setPosterFailed(true)}
             />
           ) : (
-            <div className="flex h-full items-center justify-center text-sm text-muted">포스터 준비 중</div>
+            <div className="flex h-full items-center justify-center text-sm text-muted">
+              포스터 준비 중
+            </div>
           )}
         </div>
         <div className="min-w-0">
-          <h1 id="movie-detail-title" className="text-3xl font-bold break-keep sm:text-4xl">{movie.title}</h1>
+          <h1
+            id="movie-detail-title"
+            className="text-3xl font-bold break-keep sm:text-4xl"
+          >
+            {movie.title}
+          </h1>
           <dl className="mt-6 grid gap-3 sm:grid-cols-2">
             {info.map(({ label, value }) => (
               <div key={label}>
@@ -61,8 +68,12 @@ export default function MovieOverview({ movie }: MovieOverviewProps) {
           </dl>
         </div>
         <section aria-labelledby="movie-overview-title" className="sm:col-span-2">
-          <h2 id="movie-overview-title" className="text-xl font-bold">줄거리</h2>
-          <p className="mt-3 leading-8 whitespace-pre-line text-muted">{movie.overview || '등록된 줄거리가 없습니다.'}</p>
+          <h2 id="movie-overview-title" className="text-xl font-bold">
+            줄거리
+          </h2>
+          <p className="mt-3 leading-8 whitespace-pre-line text-muted">
+            {movie.overview || '등록된 줄거리가 없습니다.'}
+          </p>
         </section>
       </div>
     </article>

@@ -16,11 +16,18 @@ export default function RatingFilter({ rating, onChange }: RatingFilterProps) {
           최소 평점
           <select
             value={rating.min}
-            onChange={(event) => onChange({ ...rating, min: Number(event.target.value) })}
+            onChange={(event) =>
+              onChange({
+                ...rating,
+                min: Number(event.target.value),
+              })
+            }
             className="rounded-lg border border-slate-300 bg-white px-3 py-2 focus-visible:outline-accent"
           >
             {RATINGS.map((value) => (
-              <option key={value} value={value} disabled={value > rating.max}>{value}점</option>
+              <option key={value} value={value} disabled={value > rating.max}>
+                {value}점
+              </option>
             ))}
           </select>
         </label>
@@ -28,11 +35,18 @@ export default function RatingFilter({ rating, onChange }: RatingFilterProps) {
           최대 평점
           <select
             value={rating.max}
-            onChange={(event) => onChange({ ...rating, max: Number(event.target.value) })}
+            onChange={(event) =>
+              onChange({
+                ...rating,
+                max: Number(event.target.value),
+              })
+            }
             className="rounded-lg border border-slate-300 bg-white px-3 py-2 focus-visible:outline-accent"
           >
             {RATINGS.map((value) => (
-              <option key={value} value={value} disabled={value < rating.min}>{value}점</option>
+              <option key={value} value={value} disabled={value < rating.min}>
+                {value}점
+              </option>
             ))}
           </select>
         </label>
@@ -44,7 +58,9 @@ export default function RatingFilter({ rating, onChange }: RatingFilterProps) {
           전체 평점
         </button>
       </div>
-      <p className="mt-3 text-sm text-muted">10점 만점 기준, {rating.min}점 이상 {rating.max}점 이하의 영화를 조회합니다.</p>
+      <p className="mt-3 text-sm text-muted">
+        10점 만점 기준, {rating.min}점 이상 {rating.max}점 이하의 영화를 조회합니다.
+      </p>
     </fieldset>
   );
 }

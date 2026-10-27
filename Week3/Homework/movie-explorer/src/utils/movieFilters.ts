@@ -7,7 +7,9 @@ export const SORT_OPTIONS: { value: MovieSort; label: string }[] = [
 ];
 
 export function readSort(params: URLSearchParams): MovieSort {
-  return SORT_OPTIONS.find((option) => option.value === params.get('sort'))?.value ?? 'popularity.desc';
+  const selectedSort = params.get('sort');
+  const option = SORT_OPTIONS.find((option) => option.value === selectedSort);
+  return option?.value ?? 'popularity.desc';
 }
 
 export function readRating(params: URLSearchParams): RatingRange {

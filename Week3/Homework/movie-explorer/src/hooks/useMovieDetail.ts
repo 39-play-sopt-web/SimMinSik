@@ -45,5 +45,10 @@ export function useMovieDetail(movieId: number) {
     setRetryCount((count) => count + 1);
   }
 
-  return { movie, isLoading, error, retry };
+  return {
+    movie,
+    isLoading,
+    error,
+    retry,
+  };
 }

@@ -9,9 +9,18 @@ export const router = createBrowserRouter([
     path: '/',
     element: <AppLayout />,
     children: [
-      { index: true, element: <MovieListPage /> },
-      { path: 'movies/:movieId', element: <MovieDetailPage /> },
-      { path: '*', element: <NotFoundPage /> },
+      {
+        index: true,
+        element: <MovieListPage />,
+      },
+      {
+        path: 'movies/:movieId',
+        element: <MovieDetailPage />,
+      },
+      {
+        path: '*',
+        element: <NotFoundPage />,
+      },
     ],
   },
 ]);

@@ -26,7 +26,9 @@ export default function MovieCard({ movie }: MovieCardProps) {
               onError={() => setHasImageError(true)}
             />
           ) : (
-            <div className="flex h-full items-center justify-center text-sm text-muted">포스터 준비 중</div>
+            <div className="flex h-full items-center justify-center text-sm text-muted">
+              포스터 준비 중
+            </div>
           )}
         </div>
         <div className="p-4">

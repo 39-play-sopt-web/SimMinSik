@@ -20,7 +20,11 @@ export default function BackToTop() {
   }
 
   return (
-    <button type="button" onClick={goToTop} className="fixed right-5 bottom-5 z-10 rounded-full bg-accent px-5 py-3 font-semibold text-white shadow-lg hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-4">
+    <button
+      type="button"
+      onClick={goToTop}
+      className="fixed right-5 bottom-5 z-10 rounded-full bg-accent px-5 py-3 font-semibold text-white shadow-lg hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-4"
+    >
       ↑ 맨 위로
     </button>
   );

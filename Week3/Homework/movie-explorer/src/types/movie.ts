@@ -19,7 +19,10 @@ export interface RatingRange {
   max: number;
 }
 
-export type MovieSort = 'popularity.desc' | 'vote_average.desc' | 'primary_release_date.desc';
+export type MovieSort =
+  | 'popularity.desc'
+  | 'vote_average.desc'
+  | 'primary_release_date.desc';
 
 export interface MovieDetail extends Movie {
   backdrop_path: string | null;
@@ -30,7 +33,11 @@ export interface MovieDetail extends Movie {
   original_title: string;
   original_language: string;
   production_countries: { iso_3166_1: string; name: string }[];
-  spoken_languages: { iso_639_1: string; name: string; english_name: string }[];
+  spoken_languages: {
+    iso_639_1: string;
+    name: string;
+    english_name: string;
+  }[];
   budget: number;
   revenue: number;
 }
