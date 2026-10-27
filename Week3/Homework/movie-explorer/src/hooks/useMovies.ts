@@ -2,9 +2,9 @@ import axios from 'axios';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useSearchParams } from 'react-router';
 import { getMovies } from '../api/movies';
-import type { Movie, RatingRange } from '../types/movie';
+import type { Movie, MovieSort, RatingRange } from '../types/movie';
 
-export function useMovies(rating: RatingRange) {
+export function useMovies(rating: RatingRange, sort: MovieSort) {
   const [params, setParams] = useSearchParams();
   const [movies, setMovies] = useState<Movie[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -21,7 +21,7 @@ export function useMovies(rating: RatingRange) {
 
     async function loadMovies() {
       try {
-        const data = await getMovies({ min, max }, page, controller.signal);
+        const data = await getMovies({ min, max }, page, sort, controller.signal);
         if (!controller.signal.aborted) {
           // API 응답에 범위 밖 평점이 포함되는 경우도 제외
           const nextMovies = data.results.filter((movie) => movie.vote_average >= min && movie.vote_average <= max);
@@ -55,7 +55,7 @@ export function useMovies(rating: RatingRange) {
     void loadMovies();
     // 필터가 바뀌거나 페이지를 떠나면 이전 요청 취소
     return () => controller.abort();
-  }, [retryCount, min, max, page]);
+  }, [retryCount, min, max, page, sort]);
 
   function changeRating(nextRating: RatingRange) {
     if (nextRating.min === min && nextRating.max === max) return;
@@ -75,6 +75,14 @@ export function useMovies(rating: RatingRange) {
     setRetryCount((count) => count + 1);
   }
 
+  function changeSort(nextSort: MovieSort) {
+    if (nextSort === sort) return;
+    const nextParams = new URLSearchParams(params);
+    if (nextSort === 'popularity.desc') nextParams.delete('sort');
+    else nextParams.set('sort', nextSort);
+    setParams(nextParams);
+  }
+
   const loadMore = useCallback(() => {
     if (isRequesting.current || error || !hasNextPage) return;
     // 렌더링 전에 감지가 반복되어도 한 번만 요청
@@ -83,5 +91,5 @@ export function useMovies(rating: RatingRange) {
     setPage((previous) => previous + 1);
   }, [error, hasNextPage]);
 
-  return { movies, isLoading, error, retry, rating, changeRating, hasNextPage, loadMore };
+  return { movies, isLoading, error, retry, rating, changeRating, hasNextPage, loadMore, sort, changeSort };
 }

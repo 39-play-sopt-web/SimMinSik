@@ -1,4 +1,14 @@
-import type { RatingRange } from '../types/movie';
+import type { MovieSort, RatingRange } from '../types/movie';
+
+export const SORT_OPTIONS: { value: MovieSort; label: string }[] = [
+  { value: 'popularity.desc', label: '인기순' },
+  { value: 'vote_average.desc', label: '평점순' },
+  { value: 'primary_release_date.desc', label: '개봉일 최신순' },
+];
+
+export function readSort(params: URLSearchParams): MovieSort {
+  return SORT_OPTIONS.find((option) => option.value === params.get('sort'))?.value ?? 'popularity.desc';
+}
 
 export function readRating(params: URLSearchParams): RatingRange {
   function readScore(name: string, fallback: number) {

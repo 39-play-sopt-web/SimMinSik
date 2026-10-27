@@ -19,6 +19,8 @@ export interface RatingRange {
   max: number;
 }
 
+export type MovieSort = 'popularity.desc' | 'vote_average.desc' | 'primary_release_date.desc';
+
 export interface MovieDetail extends Movie {
   backdrop_path: string | null;
   genres: { id: number; name: string }[];
