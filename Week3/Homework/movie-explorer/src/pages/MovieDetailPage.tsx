@@ -1,5 +1,6 @@
 import { Link, useParams } from 'react-router';
 import MovieOverview from '../components/movie/MovieOverview';
+import MovieBasicInfo from '../components/movie/MovieBasicInfo';
 import { useMovieDetail } from '../hooks/useMovieDetail';
 
 function MovieDetailContent({ movieId }: { movieId: number }) {
@@ -16,7 +17,12 @@ function MovieDetailContent({ movieId }: { movieId: number }) {
       </div>
     );
   }
-  return movie ? <MovieOverview movie={movie} /> : null;
+  return movie ? (
+    <>
+      <MovieOverview movie={movie} />
+      <MovieBasicInfo movie={movie} />
+    </>
+  ) : null;
 }
 
 export default function MovieDetailPage() {
