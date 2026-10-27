@@ -1,10 +1,17 @@
-import { Outlet, ScrollRestoration, useSearchParams } from 'react-router';
+import { Outlet, ScrollRestoration } from 'react-router';
 import Header from './Header';
 import { useMovies } from '../../hooks/useMovies';
-import { readRating, readSort } from '../../utils/movieFilters';
-import type { MovieSort, RatingRange } from '../../types/movie';
+import { useMovieFilters } from '../../hooks/useMovieFilters';
 
-function MovieListLayout({ rating, sort, query }: { rating: RatingRange; sort: MovieSort; query: string }) {
+export type MovieListContext = ReturnType<typeof useMovies> &
+  ReturnType<typeof useMovieFilters>;
+
+interface MovieListLayoutProps {
+  filters: ReturnType<typeof useMovieFilters>;
+}
+
+function MovieListLayout({ filters }: MovieListLayoutProps) {
+  const { rating, sort, query } = filters;
   // 상세로 이동해도 목록 데이터와 필터 유지
   const movieList = useMovies(rating, sort, query);
   return (
@@ -18,22 +25,26 @@ function MovieListLayout({ rating, sort, query }: { rating: RatingRange; sort: M
       <Header />
       <main id="main-content" className="mx-auto max-w-5xl px-6 py-10 sm:py-14">
         {/* 주소에 맞는 페이지가 공통 레이아웃 안에 표시됨 */}
-        <Outlet context={movieList} />
+        <Outlet
+          context={{
+            ...movieList,
+            ...filters,
+          } satisfies MovieListContext}
+        />
       </main>
     </div>
   );
 }
 
 export default function AppLayout() {
-  const [params] = useSearchParams();
-  const rating = readRating(params);
-  const sort = readSort(params);
-  const query = params.get('q')?.trim() ?? '';
+  const filters = useMovieFilters();
+  const { rating, sort, query } = filters;
+  const listKey = JSON.stringify([rating.min, rating.max, sort, query]);
 
   return (
     <>
       {/* 조회 조건이 바뀔 때만 누적 목록 초기화 */}
-      <MovieListLayout key={JSON.stringify([rating.min, rating.max, sort, query])} rating={rating} sort={sort} query={query} />
+      <MovieListLayout key={listKey} filters={filters} />
       <ScrollRestoration getKey={(location) => location.pathname + location.search} />
     </>
   );
