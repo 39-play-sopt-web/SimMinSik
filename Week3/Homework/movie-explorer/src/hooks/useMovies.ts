@@ -1,24 +1,23 @@
 import axios from 'axios';
 import { useCallback, useEffect, useRef, useState } from 'react';
+import { useSearchParams } from 'react-router';
 import { getMovies } from '../api/movies';
 import type { Movie, RatingRange } from '../types/movie';
 
-export function useMovies() {
+export function useMovies(rating: RatingRange) {
+  const [params, setParams] = useSearchParams();
   const [movies, setMovies] = useState<Movie[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState('');
   const [retryCount, setRetryCount] = useState(0);
-  const [rating, setRating] = useState<RatingRange>({ min: 0, max: 10 });
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
   const isRequesting = useRef(true);
-  const activeController = useRef<AbortController | null>(null);
   const { min, max } = rating;
   const hasNextPage = page < totalPages;
 
   useEffect(() => {
     const controller = new AbortController();
-    activeController.current = controller;
 
     async function loadMovies() {
       try {
@@ -60,14 +59,12 @@ export function useMovies() {
 
   function changeRating(nextRating: RatingRange) {
     if (nextRating.min === min && nextRating.max === max) return;
-    activeController.current?.abort();
-    isRequesting.current = true;
-    setMovies([]);
-    setPage(1);
-    setTotalPages(0);
-    setError('');
-    setIsLoading(true);
-    setRating(nextRating);
+    const nextParams = new URLSearchParams(params);
+    if (nextRating.min === 0) nextParams.delete('min');
+    else nextParams.set('min', String(nextRating.min));
+    if (nextRating.max === 10) nextParams.delete('max');
+    else nextParams.set('max', String(nextRating.max));
+    setParams(nextParams);
   }
 
   function retry() {

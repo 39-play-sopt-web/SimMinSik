@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link } from 'react-router';
+import { Link, useLocation } from 'react-router';
 import type { Movie } from '../../types/movie';
 
 interface MovieCardProps {
@@ -8,11 +8,12 @@ interface MovieCardProps {
 
 export default function MovieCard({ movie }: MovieCardProps) {
   const [hasImageError, setHasImageError] = useState(false);
+  const { search } = useLocation();
 
   return (
     <li>
       <Link
-        to={`/movies/${movie.id}`}
+        to={{ pathname: `/movies/${movie.id}`, search }}
         className="group block h-full overflow-hidden rounded-2xl border border-slate-200 bg-white transition hover:-translate-y-1 hover:shadow-lg focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent motion-reduce:transform-none motion-reduce:transition-none"
       >
         <div className="aspect-[2/3] overflow-hidden bg-slate-100">

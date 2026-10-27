@@ -1,4 +1,4 @@
-import { Link, useParams } from 'react-router';
+import { Link, useLocation, useParams } from 'react-router';
 import MovieOverview from '../components/movie/MovieOverview';
 import MovieBasicInfo from '../components/movie/MovieBasicInfo';
 import { useMovieDetail } from '../hooks/useMovieDetail';
@@ -27,13 +27,14 @@ function MovieDetailContent({ movieId }: { movieId: number }) {
 
 export default function MovieDetailPage() {
   const { movieId } = useParams<{ movieId: string }>();
+  const { search } = useLocation();
   const id = Number(movieId);
   const isValidId = /^\d+$/.test(movieId ?? '') && Number.isSafeInteger(id) && id > 0 && id <= 2147483647;
 
   return (
     <section aria-label="영화 상세">
       <Link
-        to="/"
+        to={{ pathname: '/', search }}
         className="inline-flex rounded text-sm font-semibold text-accent hover:underline focus-visible:outline-2 focus-visible:outline-offset-4"
       >
         ← 목록으로 돌아가기
