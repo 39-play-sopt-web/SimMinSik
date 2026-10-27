@@ -1,6 +1,7 @@
 import MovieCard from '../components/movie/MovieCard';
 import RatingFilter from '../components/movie/RatingFilter';
 import LoadMore from '../components/movie/LoadMore';
+import BackToTop from '../components/movie/BackToTop';
 import { useOutletContext } from 'react-router';
 import type { useMovies } from '../hooks/useMovies';
 
@@ -9,7 +10,7 @@ export default function MovieListPage() {
 
   return (
     <section aria-labelledby="movie-list-title">
-      <h1 id="movie-list-title" className="text-3xl font-bold sm:text-4xl">영화 목록</h1>
+      <h1 id="movie-list-title" tabIndex={-1} className="text-3xl font-bold sm:text-4xl">영화 목록</h1>
       <p className="mt-3 text-muted">별점으로 영화를 고르고, 상세 정보를 확인해보세요.</p>
       <RatingFilter rating={rating} onChange={changeRating} />
       {movies.length > 0 ? (
@@ -20,6 +21,7 @@ export default function MovieListPage() {
         <p className="py-16 text-center text-muted">표시할 영화가 없습니다.</p>
       ) : null}
       <LoadMore isLoading={isLoading} hasNextPage={hasNextPage} error={error} onLoadMore={loadMore} onRetry={retry} />
+      <BackToTop />
     </section>
   );
 }
