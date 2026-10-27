@@ -1,10 +1,11 @@
 import MovieCard from '../components/movie/MovieCard';
 import RatingFilter from '../components/movie/RatingFilter';
 import LoadMore from '../components/movie/LoadMore';
-import { useMovies } from '../hooks/useMovies';
+import { useOutletContext } from 'react-router';
+import type { useMovies } from '../hooks/useMovies';
 
 export default function MovieListPage() {
-  const { movies, isLoading, error, retry, rating, changeRating, hasNextPage, loadMore } = useMovies();
+  const { movies, isLoading, error, retry, rating, changeRating, hasNextPage, loadMore } = useOutletContext<ReturnType<typeof useMovies>>();
 
   return (
     <section aria-labelledby="movie-list-title">

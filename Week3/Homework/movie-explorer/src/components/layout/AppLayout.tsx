@@ -1,7 +1,10 @@
-import { Outlet } from 'react-router';
+import { Outlet, ScrollRestoration } from 'react-router';
 import Header from './Header';
+import { useMovies } from '../../hooks/useMovies';
 
 export default function AppLayout() {
+  // 상세로 이동해도 목록 데이터와 필터 유지
+  const movieList = useMovies();
   return (
     <div className="min-h-screen bg-page text-foreground">
       <a
@@ -13,8 +16,9 @@ export default function AppLayout() {
       <Header />
       <main id="main-content" className="mx-auto max-w-5xl px-6 py-10 sm:py-14">
         {/* 주소에 맞는 페이지가 공통 레이아웃 안에 표시됨 */}
-        <Outlet />
+        <Outlet context={movieList} />
       </main>
+      <ScrollRestoration getKey={(location) => location.pathname + location.search} />
     </div>
   );
 }
