@@ -4,9 +4,9 @@ import { useMovies } from '../../hooks/useMovies';
 import { readRating, readSort } from '../../utils/movieFilters';
 import type { MovieSort, RatingRange } from '../../types/movie';
 
-function MovieListLayout({ rating, sort }: { rating: RatingRange; sort: MovieSort }) {
+function MovieListLayout({ rating, sort, query }: { rating: RatingRange; sort: MovieSort; query: string }) {
   // 상세로 이동해도 목록 데이터와 필터 유지
-  const movieList = useMovies(rating, sort);
+  const movieList = useMovies(rating, sort, query);
   return (
     <div className="min-h-screen bg-page text-foreground">
       <a
@@ -28,11 +28,12 @@ export default function AppLayout() {
   const [params] = useSearchParams();
   const rating = readRating(params);
   const sort = readSort(params);
+  const query = params.get('q')?.trim() ?? '';
 
   return (
     <>
       {/* 조회 조건이 바뀔 때만 누적 목록 초기화 */}
-      <MovieListLayout key={`${rating.min}-${rating.max}-${sort}`} rating={rating} sort={sort} />
+      <MovieListLayout key={JSON.stringify([rating.min, rating.max, sort, query])} rating={rating} sort={sort} query={query} />
       <ScrollRestoration getKey={(location) => location.pathname + location.search} />
     </>
   );

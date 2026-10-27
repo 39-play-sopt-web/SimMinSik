@@ -1,13 +1,20 @@
 import type { MovieDetail, MovieListResponse, MovieSort, RatingRange } from '../types/movie';
 import { apiClient } from './client';
 
-export async function getMovies(rating: RatingRange, page: number, sort: MovieSort, signal: AbortSignal) {
+interface MovieQuery {
+  rating: RatingRange;
+  page: number;
+  sort: MovieSort;
+  query: string;
+}
+
+export async function getMovies({ rating, page, sort, query }: MovieQuery, signal: AbortSignal) {
   if (!import.meta.env.VITE_API_KEY?.trim()) {
     throw new Error('.env에 TMDB API 키를 입력해주세요.');
   }
 
-  const { data } = await apiClient.get<MovieListResponse>('/discover/movie', {
-    params: {
+  const { data } = await apiClient.get<MovieListResponse>(query ? '/search/movie' : '/discover/movie', {
+    params: query ? { page, query, include_adult: false } : {
       page,
       sort_by: sort,
       include_adult: false,

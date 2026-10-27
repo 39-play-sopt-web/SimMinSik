@@ -4,7 +4,7 @@ import { useSearchParams } from 'react-router';
 import { getMovies } from '../api/movies';
 import type { Movie, MovieSort, RatingRange } from '../types/movie';
 
-export function useMovies(rating: RatingRange, sort: MovieSort) {
+export function useMovies(rating: RatingRange, sort: MovieSort, query: string) {
   const [params, setParams] = useSearchParams();
   const [movies, setMovies] = useState<Movie[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -12,6 +12,7 @@ export function useMovies(rating: RatingRange, sort: MovieSort) {
   const [retryCount, setRetryCount] = useState(0);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
+  const [canAutoLoad, setCanAutoLoad] = useState(true);
   const isRequesting = useRef(true);
   const { min, max } = rating;
   const hasNextPage = page < totalPages;
@@ -21,10 +22,12 @@ export function useMovies(rating: RatingRange, sort: MovieSort) {
 
     async function loadMovies() {
       try {
-        const data = await getMovies({ min, max }, page, sort, controller.signal);
+        const data = await getMovies({ rating: { min, max }, page, sort, query }, controller.signal);
         if (!controller.signal.aborted) {
           // API 응답에 범위 밖 평점이 포함되는 경우도 제외
           const nextMovies = data.results.filter((movie) => movie.vote_average >= min && movie.vote_average <= max);
+          // 빈 페이지를 연속으로 자동 조회하지 않도록 버튼으로 전환
+          setCanAutoLoad(nextMovies.length > 0);
           setMovies((previous) => {
             if (page === 1) return nextMovies;
             const movieMap = new Map(previous.map((movie) => [movie.id, movie]));
@@ -55,7 +58,7 @@ export function useMovies(rating: RatingRange, sort: MovieSort) {
     void loadMovies();
     // 필터가 바뀌거나 페이지를 떠나면 이전 요청 취소
     return () => controller.abort();
-  }, [retryCount, min, max, page, sort]);
+  }, [retryCount, min, max, page, sort, query]);
 
   function changeRating(nextRating: RatingRange) {
     if (nextRating.min === min && nextRating.max === max) return;
@@ -83,6 +86,15 @@ export function useMovies(rating: RatingRange, sort: MovieSort) {
     setParams(nextParams);
   }
 
+  function changeQuery(value: string) {
+    const nextQuery = value.trim();
+    if (nextQuery === query) return;
+    const nextParams = new URLSearchParams(params);
+    if (nextQuery) nextParams.set('q', nextQuery);
+    else nextParams.delete('q');
+    setParams(nextParams);
+  }
+
   const loadMore = useCallback(() => {
     if (isRequesting.current || error || !hasNextPage) return;
     // 렌더링 전에 감지가 반복되어도 한 번만 요청
@@ -91,5 +103,5 @@ export function useMovies(rating: RatingRange, sort: MovieSort) {
     setPage((previous) => previous + 1);
   }, [error, hasNextPage]);
 
-  return { movies, isLoading, error, retry, rating, changeRating, hasNextPage, loadMore, sort, changeSort };
+  return { movies, isLoading, error, retry, rating, changeRating, hasNextPage, loadMore, sort, changeSort, query, changeQuery, canAutoLoad };
 }
