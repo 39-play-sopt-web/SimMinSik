@@ -102,7 +102,7 @@ export default function GameBoard({ level, onStart, onComplete }) {
     setNextNumber((previous) => previous + 1);
 
     if (number === total) {
-      onComplete(Number(level));
+      onComplete(level);
     }
   }
 

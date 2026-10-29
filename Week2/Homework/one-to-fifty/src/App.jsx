@@ -15,7 +15,7 @@ const Page = styled.div`
 
 export default function App() {
   const [menu, setMenu] = useState('game');
-  const [level, setLevel] = useState('1');
+  const [level, setLevel] = useState(1);
   const [result, setResult] = useState(null);
   const [gameId, setGameId] = useState(0);
   const { elapsedTime, startTimer, stopTimer, resetTimer } = useTimer();
