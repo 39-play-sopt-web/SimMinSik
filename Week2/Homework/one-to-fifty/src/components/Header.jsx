@@ -28,8 +28,13 @@ const MenuButton = styled.button`
   padding: 10px 16px;
   border: 0;
   border-radius: 8px;
-  background: ${({ selected }) => selected ? '#624589' : '#e9e4ef'};
-  color: ${({ selected }) => selected ? '#fff' : '#292433'};
+  background: #e9e4ef;
+  color: #292433;
+
+  &[aria-pressed='true'] {
+    background: #624589;
+    color: #fff;
+  }
 `;
 
 const LevelSelect = styled.select`
@@ -57,10 +62,16 @@ export default function Header({
   return (
     <Container>
       <Group as="nav" aria-label="메인 메뉴">
-        <MenuButton selected={menu === 'game'} aria-pressed={menu === 'game'} onClick={() => onMenuChange('game')}>
+        <MenuButton
+          aria-pressed={menu === 'game'}
+          onClick={() => onMenuChange('game')}
+        >
           게임
         </MenuButton>
-        <MenuButton selected={menu === 'ranking'} aria-pressed={menu === 'ranking'} onClick={() => onMenuChange('ranking')}>
+        <MenuButton
+          aria-pressed={menu === 'ranking'}
+          onClick={() => onMenuChange('ranking')}
+        >
           랭킹
         </MenuButton>
       </Group>
@@ -77,7 +88,7 @@ export default function Header({
             <option value="2">Level 2</option>
             <option value="3">Level 3</option>
           </LevelSelect>
-          <Timer role="timer" aria-live="off" aria-label="플레이 시간">
+          <Timer role="timer" aria-label="플레이 시간">
             {elapsedTime.toFixed(2)}초
           </Timer>
         </GameControls>
