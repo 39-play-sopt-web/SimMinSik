@@ -46,7 +46,14 @@ const Timer = styled.output`
   white-space: nowrap;
 `;
 
-export default function Header({ menu, onMenuChange, level, onLevelChange, elapsedTime }) {
+export default function Header({
+  menu,
+  onMenuChange,
+  level,
+  onLevelChange,
+  elapsedTime,
+  levelSelectRef,
+}) {
   return (
     <Container>
       <Group as="nav" aria-label="메인 메뉴">
@@ -60,7 +67,12 @@ export default function Header({ menu, onMenuChange, level, onLevelChange, elaps
       {menu === 'game' && (
         <GameControls>
           <label htmlFor="level">레벨</label>
-          <LevelSelect id="level" value={level} onChange={(event) => onLevelChange(Number(event.target.value))}>
+          <LevelSelect
+            ref={levelSelectRef}
+            id="level"
+            value={level}
+            onChange={(event) => onLevelChange(Number(event.target.value))}
+          >
             <option value="1">Level 1</option>
             <option value="2">Level 2</option>
             <option value="3">Level 3</option>

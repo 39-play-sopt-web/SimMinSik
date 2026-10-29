@@ -37,22 +37,21 @@ const ConfirmButton = styled.button`
   color: #fff;
 `;
 
-export default function ResultModal({ result, onConfirm }) {
+export default function ResultModal({ result, onConfirm, returnFocusRef }) {
   const dialogRef = useRef(null);
   const confirmRef = useRef(null);
 
   useEffect(() => {
     const dialog = dialogRef.current;
-    const previousFocus = document.activeElement;
+    const returnFocusTarget = returnFocusRef.current;
     dialog.showModal();
     confirmRef.current.focus();
 
     return () => {
       dialog.close();
-      if (previousFocus?.isConnected) previousFocus.focus();
-      else document.getElementById('level')?.focus();
+      returnFocusTarget?.focus();
     };
-  }, []);
+  }, [returnFocusRef]);
 
   return createPortal(
     <Dialog

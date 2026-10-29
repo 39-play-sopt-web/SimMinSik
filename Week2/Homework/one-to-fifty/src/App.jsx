@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import styled from '@emotion/styled';
 import Header from './components/Header';
 import GameBoard from './components/GameBoard';
@@ -14,6 +14,7 @@ const Page = styled.div`
 `;
 
 export default function App() {
+  const levelSelectRef = useRef(null);
   const [menu, setMenu] = useState('game');
   const [level, setLevel] = useState(1);
   const [result, setResult] = useState(null);
@@ -61,6 +62,7 @@ export default function App() {
         level={level}
         onLevelChange={handleLevelChange}
         elapsedTime={elapsedTime}
+        levelSelectRef={levelSelectRef}
       />
       <main>
         {menu === 'game' ? (
@@ -72,7 +74,13 @@ export default function App() {
           />
         ) : <Ranking />}
       </main>
-      {result && <ResultModal result={result} onConfirm={handleResultConfirm} />}
+      {result && (
+        <ResultModal
+          result={result}
+          onConfirm={handleResultConfirm}
+          returnFocusRef={levelSelectRef}
+        />
+      )}
     </Page>
   );
 }
