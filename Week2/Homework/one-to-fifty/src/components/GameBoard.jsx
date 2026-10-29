@@ -27,24 +27,24 @@ const Cell = styled.button`
   aspect-ratio: 1;
   min-width: 0;
   padding: 0;
-  border: 1px solid #ded9e6;
+  border: 1px solid ${({ theme }) => theme.colors.border};
   border-radius: 12px;
-  background: #fff;
-  color: #624589;
+  background: ${({ theme }) => theme.colors.surface};
+  color: ${({ theme }) => theme.colors.primary};
   font-size: clamp(20px, 5vw, 28px);
   font-weight: 700;
   transition: transform 120ms ease, background-color 120ms ease, color 120ms ease;
 
   @media (hover: hover) {
     &:hover:not(:disabled) {
-      background: #e9e4ef;
+      background: ${({ theme }) => theme.colors.subtle};
     }
   }
 
   &:active:not(:disabled) {
     transform: scale(0.94);
-    background: #624589;
-    color: #fff;
+    background: ${({ theme }) => theme.colors.primary};
+    color: ${({ theme }) => theme.colors.surface};
   }
 
   &:disabled {

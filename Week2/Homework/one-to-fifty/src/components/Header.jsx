@@ -7,7 +7,7 @@ const Container = styled.header`
   flex-wrap: wrap;
   gap: 20px;
   padding-bottom: 24px;
-  border-bottom: 1px solid #ded9e6;
+  border-bottom: 1px solid ${({ theme }) => theme.colors.border};
 `;
 
 const Group = styled.div`
@@ -28,20 +28,20 @@ const MenuButton = styled.button`
   padding: 10px 16px;
   border: 0;
   border-radius: 8px;
-  background: #e9e4ef;
-  color: #292433;
+  background: ${({ theme }) => theme.colors.subtle};
+  color: ${({ theme }) => theme.colors.text};
 
   &[aria-pressed='true'] {
-    background: #624589;
-    color: #fff;
+    background: ${({ theme }) => theme.colors.primary};
+    color: ${({ theme }) => theme.colors.surface};
   }
 `;
 
 const LevelSelect = styled.select`
   padding: 8px;
-  border: 1px solid #ded9e6;
+  border: 1px solid ${({ theme }) => theme.colors.border};
   border-radius: 8px;
-  background: #fff;
+  background: ${({ theme }) => theme.colors.surface};
 `;
 
 const Timer = styled.output`

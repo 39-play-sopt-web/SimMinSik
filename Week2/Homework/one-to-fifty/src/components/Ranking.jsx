@@ -21,25 +21,25 @@ const Heading = styled.div`
 
 const ResetButton = styled.button`
   padding: 10px 16px;
-  border: 1px solid #ded9e6;
+  border: 1px solid ${({ theme }) => theme.colors.border};
   border-radius: 8px;
-  background: #fff;
-  color: #624589;
+  background: ${({ theme }) => theme.colors.surface};
+  color: ${({ theme }) => theme.colors.primary};
 
   @media (hover: hover) {
     &:hover {
-      background: #e9e4ef;
+      background: ${({ theme }) => theme.colors.subtle};
     }
   }
 `;
 
 const TableContainer = styled.div`
   overflow-x: auto;
-  border: 1px solid #ded9e6;
+  border: 1px solid ${({ theme }) => theme.colors.border};
   border-radius: 12px;
 
   &:focus-visible {
-    outline: 3px solid #8565b3;
+    outline: 3px solid ${({ theme }) => theme.colors.focus};
     outline-offset: 3px;
   }
 `;
@@ -48,16 +48,16 @@ const Table = styled.table`
   width: 100%;
   min-width: 520px;
   border-collapse: collapse;
-  background: #fff;
+  background: ${({ theme }) => theme.colors.surface};
 
   th, td {
     padding: 16px;
-    border-bottom: 1px solid #ded9e6;
+    border-bottom: 1px solid ${({ theme }) => theme.colors.border};
     white-space: nowrap;
   }
 
   th {
-    background: #e9e4ef;
+    background: ${({ theme }) => theme.colors.subtle};
   }
 
   td:last-child {

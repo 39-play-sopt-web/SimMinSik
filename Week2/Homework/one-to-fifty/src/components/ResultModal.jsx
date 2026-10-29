@@ -7,12 +7,12 @@ const Dialog = styled.dialog`
   padding: 32px;
   border: 0;
   border-radius: 16px;
-  color: #292433;
+  color: ${({ theme }) => theme.colors.text};
   text-align: center;
-  box-shadow: 0 16px 48px #29243333;
+  box-shadow: 0 16px 48px ${({ theme }) => theme.colors.shadow};
 
   &::backdrop {
-    background: #29243399;
+    background: ${({ theme }) => theme.colors.backdrop};
   }
 
   @media (width <= 480px) {
@@ -21,7 +21,7 @@ const Dialog = styled.dialog`
 `;
 
 const Time = styled.p`
-  color: #624589;
+  color: ${({ theme }) => theme.colors.primary};
   font-size: 32px;
   font-weight: 700;
   font-variant-numeric: tabular-nums;
@@ -33,8 +33,8 @@ const ConfirmButton = styled.button`
   padding: 12px 16px;
   border: 0;
   border-radius: 8px;
-  background: #624589;
-  color: #fff;
+  background: ${({ theme }) => theme.colors.primary};
+  color: ${({ theme }) => theme.colors.surface};
 `;
 
 export default function ResultModal({ result, onConfirm, returnFocusRef }) {
