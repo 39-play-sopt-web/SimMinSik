@@ -24,9 +24,10 @@ export default function useTimer() {
   }
 
   function stopTimer() {
-    if (startedAt.current === null) return;
+    if (startedAt.current === null) return null;
 
     const finalTime = (performance.now() - startedAt.current) / 1000;
+    startedAt.current = null;
     setElapsedTime(finalTime);
     setIsRunning(false);
     return finalTime;

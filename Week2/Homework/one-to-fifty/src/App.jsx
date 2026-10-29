@@ -28,6 +28,8 @@ export default function App() {
 
   function handleGameComplete(completedLevel) {
     const finalTime = stopTimer();
+    if (finalTime === null) return;
+
     let saveError = '';
 
     try {
