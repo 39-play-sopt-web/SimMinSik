@@ -12,39 +12,8 @@ const Section = styled.section`
   }
 `;
 
-const BoardWrapper = styled.div`
-  position: relative;
-  margin-top: 24px;
-`;
-
-const Cover = styled.div`
-  position: absolute;
-  inset: 0;
-  display: grid;
-  grid-template-columns: repeat(${({ size }) => size}, 1fr);
-  grid-template-rows: repeat(${({ size }) => size}, 1fr);
-  gap: 12px;
-  border-radius: 12px;
-  background: #e9e4ef;
-
-  @media (width <= 480px) {
-    gap: 8px;
-  }
-`;
-
-const StartButton = styled.button`
-  aspect-ratio: 1;
-  min-width: 0;
-  padding: 0;
-  border: 0;
-  border-radius: 12px;
-  background: #624589;
-  color: #fff;
-  font-size: clamp(20px, 5vw, 28px);
-  font-weight: 700;
-`;
-
 const Board = styled.div`
+  margin-top: 24px;
   display: grid;
   grid-template-columns: repeat(${({ size }) => size}, 1fr);
   gap: 12px;
@@ -118,18 +87,12 @@ export default function GameBoard({ level, onStart, onComplete }) {
   const [isRevealed, setIsRevealed] = useState(false);
 
   function handleNumberClick(number, cellIndex) {
-    if ((!isRevealed && number !== 1) || number !== nextNumber) return;
+    if (number !== nextNumber) return;
 
     if (number === 1) {
       setIsRevealed(true);
       onStart();
     }
-    if (number === total) {
-      setNextNumber(total + 1);
-      onComplete(Number(level));
-      return;
-    }
-
     // 앞쪽 숫자를 누른 자리에 뒤쪽 숫자를 하나씩 채움
     const replacement = number <= half ? remainingNumbers[number - 1] : null;
 
@@ -137,6 +100,10 @@ export default function GameBoard({ level, onStart, onComplete }) {
       index === cellIndex ? replacement : value
     )));
     setNextNumber((previous) => previous + 1);
+
+    if (number === total) {
+      onComplete(Number(level));
+    }
   }
 
   return (
@@ -147,29 +114,23 @@ export default function GameBoard({ level, onStart, onComplete }) {
           nextNumber > total ? '완료!' : <>다음 숫자: <strong>{nextNumber}</strong></>
         )}
       </p>
-      <BoardWrapper>
-        <Board size={size} aria-hidden={!isRevealed}>
-          {numbers.map((number, index) => (
+      <Board size={size}>
+        {numbers.map((number, index) => {
+          const isHidden = !isRevealed && number !== 1;
+
+          return (
             <Cell
               key={index}
               type="button"
-              disabled={!isRevealed || number === null}
+              disabled={isHidden || number === null}
+              aria-hidden={isHidden}
               onClick={() => handleNumberClick(number, index)}
             >
-              {isRevealed ? number : ''}
+              {isHidden ? '' : number}
             </Cell>
-          ))}
-        </Board>
-        {!isRevealed && (
-          <Cover size={size}>
-            {numbers.map((number, index) => number === 1 ? (
-              <StartButton key={index} type="button" onClick={() => handleNumberClick(1, index)}>
-                1
-              </StartButton>
-            ) : <span key={index} aria-hidden="true" />)}
-          </Cover>
-        )}
-      </BoardWrapper>
+          );
+        })}
+      </Board>
     </Section>
   );
 }
