@@ -1,4 +1,4 @@
 export const postKeys = {
   all: ['posts'] as const,
-  list: (keyword: string) => ['posts', 'list', { keyword }] as const,
+  infinite: (keyword: string) => ['posts', 'infinite', { keyword }] as const,
 };

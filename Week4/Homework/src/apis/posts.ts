@@ -2,12 +2,17 @@ import type { ApiResponse } from '../types/api';
 import type { PostListResponse } from '../types/post';
 import { apiClient } from './apiClient';
 
-export async function getPosts(keyword: string, signal: AbortSignal) {
+export async function getPosts(
+  keyword: string,
+  signal: AbortSignal,
+  cursor?: number,
+) {
   const { data: response } = await apiClient.get<ApiResponse<PostListResponse>>(
     '/posts',
     {
       params: {
         keyword: keyword || undefined,
+        cursor,
         size: 10,
       },
       signal,
