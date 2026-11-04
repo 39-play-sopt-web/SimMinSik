@@ -22,54 +22,47 @@ export function AuthorizationPage() {
     : error?.message;
 
   return (
-    <main className="mx-auto max-w-lg px-6 py-16">
-      <Link className="text-sm underline" to="/">
-        게시판 목록으로
-      </Link>
-      <h1 className="mt-8 text-3xl font-bold">회원 코드 발급</h1>
-      <p className="mt-3 text-slate-600">
-        게시글을 작성하려면 소속 파트를 선택해 주세요.
-      </p>
+    <main className="flex min-h-dvh items-center justify-center px-5 py-12">
+      <div className="w-full max-w-sm">
+        <h1 className="text-3xl font-bold tracking-tight">PLAY SOPT 게시판</h1>
+        <h2 className="mt-3 text-base font-semibold">회원 코드 발급</h2>
+        <p className="mt-2 text-sm text-muted">파트를 선택하고 코드를 발급받아 주세요.</p>
 
-      <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
-        <fieldset disabled={isPending}>
-          <legend className="mb-3 font-semibold">소속 파트</legend>
-          <div className="flex flex-wrap gap-3">
-            {PARTS.map((value) => (
-              <label
-                className="flex cursor-pointer items-center gap-2 rounded-lg border border-slate-300 bg-white px-4 py-3 has-checked:border-purple-700 has-checked:bg-purple-50"
-                key={value}
-              >
-                <input
-                  type="radio"
-                  name="part"
-                  value={value}
-                  checked={part === value}
-                  onChange={() => {
-                    setPart(value);
-                    reset();
-                  }}
-                />
-                {value}
-              </label>
-            ))}
-          </div>
-        </fieldset>
+        <form className="mt-6 space-y-5" onSubmit={handleSubmit}>
+          <fieldset disabled={isPending}>
+            <label className="mb-2 block text-sm text-muted" htmlFor="member-part">소속 파트</label>
+            <select
+              className="form-input disabled:opacity-40"
+              id="member-part"
+              value={part ?? ''}
+              onChange={(event) => {
+                setPart(PARTS.find((value) => value === event.target.value) ?? null);
+                reset();
+              }}
+            >
+              <option value="">파트를 선택해 주세요</option>
+              {PARTS.map((value) => (
+                <option value={value} key={value}>{value}</option>
+              ))}
+            </select>
+          </fieldset>
 
-        {isError && (
-          <p className="text-sm text-red-700" role="alert">
-            {errorMessage || '코드를 발급하지 못했습니다. 다시 시도해 주세요.'}
-          </p>
-        )}
+          {isError && (
+            <p className="text-sm text-red-300" role="alert">
+              {errorMessage || '코드를 발급하지 못했습니다. 다시 시도해 주세요.'}
+            </p>
+          )}
 
-        <button
-          className="w-full rounded-lg bg-purple-700 px-5 py-3 font-semibold text-white transition-colors enabled:hover:bg-purple-900 disabled:cursor-not-allowed disabled:opacity-40"
-          type="submit"
-          disabled={!part || isPending}
-        >
-          {isPending ? '발급 중...' : '코드 발급'}
-        </button>
-      </form>
+          <button
+            className="button-primary w-full"
+            type="submit"
+            disabled={!part || isPending}
+          >
+            {isPending ? '발급 중...' : '코드 발급'}
+          </button>
+          <Link className="button-secondary w-full" to="/">게시판 목록 보기</Link>
+        </form>
+      </div>
     </main>
   );
 }

@@ -23,30 +23,30 @@ export function PostSearch({ onSearch }: PostSearchProps) {
   }
 
   return (
-    <form className="mt-8" role="search" onSubmit={handleSubmit}>
-      <label className="mb-2 block font-semibold" htmlFor="post-keyword">
+    <form className="mt-5" role="search" onSubmit={handleSubmit}>
+      <label className="sr-only" htmlFor="post-keyword">
         제목 검색
       </label>
       <div className="flex flex-wrap gap-2">
         <input
-          className="min-w-0 flex-1 rounded-lg border border-slate-300 bg-white px-4 py-3"
+          className="form-input min-w-0 flex-1 basis-40"
           id="post-keyword"
           type="search"
           value={input}
           onChange={(event) => setInput(event.target.value)}
-          placeholder="검색어를 입력해 주세요"
+          placeholder="제목으로 검색"
           aria-describedby="search-help"
           aria-invalid={hasError}
         />
         <button
-          className="rounded-lg bg-purple-700 px-5 py-3 font-semibold text-white transition-colors enabled:hover:bg-purple-900 disabled:cursor-not-allowed disabled:opacity-40"
+          className="button-primary"
           type="submit"
           disabled={!isValid}
         >
           검색
         </button>
         <button
-          className="rounded-lg border border-slate-300 bg-white px-4 py-3 transition-colors hover:bg-slate-100"
+          className="button-secondary"
           type="button"
           onClick={handleReset}
         >
@@ -54,7 +54,7 @@ export function PostSearch({ onSearch }: PostSearchProps) {
         </button>
       </div>
       <p
-        className={hasError ? 'mt-2 text-sm text-red-700' : 'mt-2 text-sm text-slate-500'}
+        className={hasError ? 'mt-2 text-xs text-red-300' : 'mt-2 text-xs text-muted'}
         id="search-help"
       >
         검색어는 앞뒤 공백을 제외하고 2~50자로 입력해 주세요.

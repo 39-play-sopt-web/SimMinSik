@@ -1,1 +1,26 @@
 @import "tailwindcss";
+
+@theme inline {
+  --color-surface: var(--board-surface);
+  --color-accent: var(--board-accent);
+  --color-muted: var(--board-muted);
+  --color-line: var(--board-border);
+}
+
+@layer components {
+  .button-primary {
+    @apply inline-flex items-center justify-center rounded-md border border-transparent bg-accent px-4 py-2 text-sm font-semibold text-[#172622] transition-colors enabled:hover:bg-[#c0eee5] disabled:cursor-not-allowed disabled:opacity-40;
+  }
+
+  a.button-primary:hover {
+    background-color: #c0eee5;
+  }
+
+  .button-secondary {
+    @apply inline-flex items-center justify-center rounded-md border border-line px-4 py-2 text-sm text-zinc-200 transition-colors hover:border-accent hover:text-accent disabled:cursor-not-allowed disabled:opacity-40;
+  }
+
+  .form-input {
+    @apply w-full rounded-md border border-line bg-surface px-3 py-2.5 text-sm text-zinc-100 placeholder:text-muted/70 focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20;
+  }
+}
