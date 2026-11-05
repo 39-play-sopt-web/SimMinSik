@@ -1,5 +1,6 @@
 import type { ApiResponse } from '../types/api';
-import type { PostListResponse } from '../types/post';
+import type { CreatePostInput, PostListResponse, PostSummary } from '../types/post';
+import { getAuthorizationCode } from '../lib/authStorage';
 import { apiClient } from './apiClient';
 
 export async function getPosts(
@@ -21,6 +22,25 @@ export async function getPosts(
 
   if (!response.isSuccess) {
     throw new Error(response.message || '게시글을 불러오지 못했습니다.');
+  }
+
+  return response.data;
+}
+
+export async function createPost(input: CreatePostInput) {
+  const authorizationCode = getAuthorizationCode();
+  if (!authorizationCode) {
+    throw new Error('회원 코드를 먼저 발급받아 주세요.');
+  }
+
+  const { data: response } = await apiClient.post<ApiResponse<PostSummary>>(
+    '/posts',
+    input,
+    { headers: { Authorization: authorizationCode } },
+  );
+
+  if (!response.isSuccess) {
+    throw new Error(response.message || '게시글을 작성하지 못했습니다.');
   }
 
   return response.data;

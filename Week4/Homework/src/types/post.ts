@@ -12,3 +12,9 @@ export interface PostListResponse {
   nextCursor: number | null;
   hasNext: boolean;
 }
+
+export interface CreatePostInput {
+  title: string;
+  content: string;
+  author: string;
+}
