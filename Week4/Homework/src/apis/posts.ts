@@ -45,3 +45,16 @@ export async function createPost(input: CreatePostInput) {
 
   return response.data;
 }
+
+export async function getPost(postId: number, signal: AbortSignal) {
+  const { data: response } = await apiClient.get<ApiResponse<PostSummary>>(
+    `/posts/${postId}`,
+    { signal },
+  );
+
+  if (!response.isSuccess) {
+    throw new Error(response.message || '게시글을 불러오지 못했습니다.');
+  }
+
+  return response.data;
+}

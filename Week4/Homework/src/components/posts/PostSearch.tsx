@@ -2,11 +2,12 @@ import { useState } from 'react';
 import type { FormEvent } from 'react';
 
 interface PostSearchProps {
+  initialKeyword: string;
   onSearch: (keyword: string) => void;
 }
 
-export function PostSearch({ onSearch }: PostSearchProps) {
-  const [input, setInput] = useState('');
+export function PostSearch({ initialKeyword, onSearch }: PostSearchProps) {
+  const [input, setInput] = useState(initialKeyword);
   const keyword = input.trim();
   const isValid = keyword.length >= 2 && keyword.length <= 50;
   const hasError = keyword.length > 0 && !isValid;

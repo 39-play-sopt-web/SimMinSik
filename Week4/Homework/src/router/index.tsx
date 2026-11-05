@@ -4,6 +4,7 @@ import { NotFoundPage } from '../pages/NotFoundPage';
 import { AuthorizationPage } from '../pages/AuthorizationPage';
 import { PostEditorPage } from '../pages/PostEditorPage';
 import { CreatePostPage } from '../pages/CreatePostPage';
+import { PostDetailPage } from '../pages/PostDetailPage';
 import { requireAuthorization } from './requireAuthorization';
 
 export const router = createBrowserRouter([
@@ -15,6 +16,10 @@ export const router = createBrowserRouter([
     path: '/posts/new',
     loader: requireAuthorization,
     Component: CreatePostPage,
+  },
+  {
+    path: '/posts/:postId',
+    Component: PostDetailPage,
   },
   {
     path: '/posts/:postId/edit',
