@@ -1,15 +1,31 @@
 import { isAxiosError } from 'axios';
-import { Link, useLocation, useParams } from 'react-router';
+import { Link, useLocation, useNavigate, useParams } from 'react-router';
 import { BoardHeader } from '../components/BoardHeader';
 import { usePost } from '../hooks/usePost';
+import { useDeletePost } from '../hooks/useDeletePost';
+import { getAuthorizationCode } from '../lib/authStorage';
 
 export function PostDetailPage() {
   const { postId } = useParams();
   const { search } = useLocation();
+  const navigate = useNavigate();
   const id = Number(postId);
   const isValidId = Number.isSafeInteger(id) && id > 0;
   const { data: post, isPending, isError, error, isFetching, refetch } = usePost(id);
   const isNotFound = isAxiosError(error) && error.response?.status === 404;
+  const { mutate: removePost, isPending: isDeleting } = useDeletePost();
+
+  function handleDelete() {
+    if (!post || isDeleting) return;
+    if (!getAuthorizationCode()) {
+      window.alert('회원 코드를 먼저 발급받아 주세요.');
+      void navigate('/auth');
+      return;
+    }
+    if (window.confirm(`“${post.title}” 게시글을 삭제하시겠습니까?`)) {
+      removePost(post.id);
+    }
+  }
 
   return (
     <>
@@ -59,6 +75,16 @@ export function PostDetailPage() {
             <p className="mt-7 whitespace-pre-wrap break-words border-t border-line pt-7 leading-8">
               {post.content}
             </p>
+            <div className="mt-8 flex justify-end">
+              <button
+                className="button-secondary text-red-300"
+                type="button"
+                onClick={handleDelete}
+                disabled={isDeleting}
+              >
+                {isDeleting ? '삭제 중...' : '삭제'}
+              </button>
+            </div>
           </article>
         )}
       </main>

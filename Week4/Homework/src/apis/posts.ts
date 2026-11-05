@@ -58,3 +58,19 @@ export async function getPost(postId: number, signal: AbortSignal) {
 
   return response.data;
 }
+
+export async function deletePost(postId: number) {
+  const authorizationCode = getAuthorizationCode();
+  if (!authorizationCode) {
+    throw new Error('회원 코드를 먼저 발급받아 주세요.');
+  }
+
+  const { data: response } = await apiClient.delete<ApiResponse<null>>(
+    `/posts/${postId}`,
+    { headers: { Authorization: authorizationCode } },
+  );
+
+  if (!response.isSuccess) {
+    throw new Error(response.message || '게시글을 삭제하지 못했습니다.');
+  }
+}
