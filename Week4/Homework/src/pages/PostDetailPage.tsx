@@ -75,7 +75,12 @@ export function PostDetailPage() {
             <p className="mt-7 whitespace-pre-wrap break-words border-t border-line pt-7 leading-8">
               {post.content}
             </p>
-            <div className="mt-8 flex justify-end">
+            <div className="mt-8 flex justify-end gap-2">
+              {!isDeleting && (
+                <Link className="button-secondary" to={{ pathname: `/posts/${post.id}/edit`, search }}>
+                  수정
+                </Link>
+              )}
               <button
                 className="button-secondary text-red-300"
                 type="button"

@@ -18,3 +18,5 @@ export interface CreatePostInput {
   content: string;
   author: string;
 }
+
+export type UpdatePostInput = Pick<CreatePostInput, 'title' | 'content'>;
