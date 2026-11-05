@@ -8,8 +8,8 @@ export function useIssueAuthorizationCode() {
 
   return useMutation({
     mutationFn: issueAuthorizationCode,
-    onSuccess: (code) => {
-      saveAuthorizationCode(code);
+    onSuccess: (code, part) => {
+      saveAuthorizationCode(code, part);
       navigate('/', { replace: true });
     },
   });
