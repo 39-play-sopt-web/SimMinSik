@@ -7,12 +7,20 @@ interface MovieSearchProps {
 
 export default function MovieSearch({ query, onSearch }: MovieSearchProps) {
   const [value, setValue] = useState(query);
+  const [previousQuery, setPreviousQuery] = useState(query);
+
+  if (query !== previousQuery) {
+    setPreviousQuery(query);
+    setValue(query);
+  }
 
   return (
     <form
       onSubmit={(event) => {
         event.preventDefault();
-        onSearch(value);
+        const nextQuery = value.trim();
+        setValue(nextQuery);
+        onSearch(nextQuery);
       }}
       role="search"
       className="mt-6"
