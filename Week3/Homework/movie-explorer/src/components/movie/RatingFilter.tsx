@@ -22,7 +22,7 @@ export default function RatingFilter({ rating, onChange }: RatingFilterProps) {
                 min: Number(event.target.value),
               })
             }
-            className="rounded-lg border border-slate-300 bg-white px-3 py-2 focus-visible:outline-accent"
+            className="rating-select rounded-lg border border-slate-300 bg-white py-2 ps-3 pe-9 focus-visible:outline-accent"
           >
             {RATINGS.map((value) => (
               <option key={value} value={value} disabled={value > rating.max}>
@@ -41,7 +41,7 @@ export default function RatingFilter({ rating, onChange }: RatingFilterProps) {
                 max: Number(event.target.value),
               })
             }
-            className="rounded-lg border border-slate-300 bg-white px-3 py-2 focus-visible:outline-accent"
+            className="rating-select rounded-lg border border-slate-300 bg-white py-2 ps-3 pe-9 focus-visible:outline-accent"
           >
             {RATINGS.map((value) => (
               <option key={value} value={value} disabled={value < rating.min}>
