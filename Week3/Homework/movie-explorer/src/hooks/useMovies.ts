@@ -49,11 +49,7 @@ export function useMovies(rating: RatingRange, sort: MovieSort, query: string) {
         if (controller.signal.aborted) return;
 
         if (axios.isAxiosError(error)) {
-          setError(
-            error.response?.status === 401
-              ? 'TMDB API 키를 확인해주세요.'
-              : '영화 목록을 불러오지 못했습니다. 다시 시도해주세요.',
-          );
+          setError('영화 목록을 불러오지 못했습니다. 다시 시도해주세요.');
         } else {
           setError(error instanceof Error ? error.message : '영화 목록을 불러오지 못했습니다.');
         }

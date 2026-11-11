@@ -22,8 +22,6 @@ export function useMovieDetail(movieId: number) {
         if (axios.isAxiosError(error)) {
           if (error.response?.status === 404) {
             setError('해당 영화를 찾을 수 없습니다.');
-          } else if (error.response?.status === 401) {
-            setError('TMDB API 키를 확인해주세요.');
           } else {
             setError('영화 정보를 불러오지 못했습니다. 다시 시도해주세요.');
           }

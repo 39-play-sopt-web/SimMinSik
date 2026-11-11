@@ -17,10 +17,6 @@ export async function getMovies(
   { rating, page, sort, query }: MovieQuery,
   signal: AbortSignal,
 ) {
-  if (!import.meta.env.VITE_API_KEY?.trim()) {
-    throw new Error('.env에 TMDB API 키를 입력해주세요.');
-  }
-
   const endpoint = query ? '/search/movie' : '/discover/movie';
   const params = query
     ? { page, query, include_adult: false }
@@ -41,10 +37,6 @@ export async function getMovies(
 }
 
 export async function getMovieDetail(movieId: number, signal: AbortSignal) {
-  if (!import.meta.env.VITE_API_KEY?.trim()) {
-    throw new Error('.env에 TMDB API 키를 입력해주세요.');
-  }
-
   const { data } = await apiClient.get<MovieDetail>(`/movie/${movieId}`, { signal });
   return data;
 }
