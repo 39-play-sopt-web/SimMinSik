@@ -2,6 +2,8 @@
 
 지난 과제에서 Emotion을 사용해봤지만, 필요한 스타일을 바로 조합할 수 있는 Tailwind가 저에게는 더 편했습니다. 그래서 이번에는 화면 스타일을 Tailwind로 작성하고, 과제 조건인 ThemeProvider와 GlobalStyle은 Emotion으로 적용했습니다.
 
+Emotion의 테마 색상은 전역 CSS 변수로 연결해 Tailwind에서도 같은 색을 사용합니다. 컴포넌트의 레이아웃과 상태별 스타일은 Tailwind 클래스에서 관리합니다.
+
 ## 실행
 
 ```sh
