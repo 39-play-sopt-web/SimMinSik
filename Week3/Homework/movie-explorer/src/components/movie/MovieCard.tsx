@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router';
+import { TMDB_IMAGE_BASE_URL } from '../../constants/movieImages';
 import type { Movie } from '../../types/movie';
 
 interface MovieCardProps {
@@ -19,7 +20,7 @@ export default function MovieCard({ movie }: MovieCardProps) {
         <div className="aspect-[2/3] overflow-hidden bg-slate-100">
           {movie.poster_path && !hasImageError ? (
             <img
-              src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+              src={`${TMDB_IMAGE_BASE_URL}/w500${movie.poster_path}`}
               alt={`${movie.title} 포스터`}
               loading="lazy"
               className="h-full w-full object-cover"

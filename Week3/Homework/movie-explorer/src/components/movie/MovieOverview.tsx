@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { TMDB_IMAGE_BASE_URL } from '../../constants/movieImages';
 import type { MovieDetail } from '../../types/movie';
 
 interface MovieOverviewProps {
@@ -30,7 +31,7 @@ export default function MovieOverview({ movie }: MovieOverviewProps) {
     <article className="mt-6 overflow-hidden rounded-2xl border border-slate-200 bg-white">
       {movie.backdrop_path && !backdropFailed && (
         <img
-          src={`https://image.tmdb.org/t/p/w1280${movie.backdrop_path}`}
+          src={`${TMDB_IMAGE_BASE_URL}/w1280${movie.backdrop_path}`}
           alt=""
           className="aspect-video w-full object-cover"
           onError={() => setBackdropFailed(true)}
@@ -40,7 +41,7 @@ export default function MovieOverview({ movie }: MovieOverviewProps) {
         <div className="aspect-[2/3] w-full max-w-60 overflow-hidden rounded-xl bg-slate-100">
           {movie.poster_path && !posterFailed ? (
             <img
-              src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+              src={`${TMDB_IMAGE_BASE_URL}/w500${movie.poster_path}`}
               alt={`${movie.title} 포스터`}
               className="h-full w-full object-cover"
               onError={() => setPosterFailed(true)}
